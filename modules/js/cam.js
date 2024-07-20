@@ -212,9 +212,6 @@ Events.on(engine, "afterUpdate", function (event) {
   if (openCloseMod) {
     const bottom = compositeArray[0].constraints[0].pointA.y - rectBase;
     const top = compositeArray[0].bodies[0].position.y - 200 - pivotValue;
-    const pivotSpace =
-      compositeArray[0].constraints[0].pointA.y - 200 - pivotValue - bottom;
-    const rectWidth = compositeArray[2].width;
     const b = top - bottom;
     const a = compositeArray[2].width;
     const angleC = Math.acos((a * a + b * b - c * c) / (2 * a * b));

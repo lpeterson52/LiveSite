@@ -3,123 +3,46 @@ upDownModule = true;
 rackPinionMod = true;
 camMod = false;
 crankMod = false;
-var constraintLength = 0
+constraintLength = 0
 pivot2Value = 100
 ////////////////////////////////GEAR SIZES//////////////////////////////////////////////
-function smallGear(){
-  deleteConstraint(compositeArray[1].bodies[0], compositeArray[0].bodies[0])
-  Body.setPosition(compositeArray[0].bodies[0], {x:compositeArray[0].constraints[0].pointA.x, y:compositeArray[0].constraints[0].pointA.y} )
-  Body.setAngle(compositeArray[1].bodies[0], 0)
-  radius = 48;
-  if(crankMod){
-    radius = radius + 52
+function changeGear(rad) {
+  deleteConstraint(compositeArray[1].bodies[0], compositeArray[0].bodies[0]);
+  Body.setPosition(compositeArray[0].bodies[0], {
+    x: compositeArray[0].constraints[0].pointA.x,
+    y: compositeArray[0].constraints[0].pointA.y,
+  });
+  Body.setAngle(compositeArray[1].bodies[0], 0);
+  radius = rad;
+  if (crankMod) {
+    radius = radius + 52;
   }
   compositeArray[1].radius = radius;
-  steps = (0.25 * radius)*2;
+  steps = 0.25 * radius * 2;
   toothWidthDegree = 4;
-  toothWidth = (toothWidthDegree/conversionFactor);
-  if(camMod == true){
-    if(compositeArray[1].shape == "cam"){
-      changeBody2(1)
+  toothWidth = toothWidthDegree / conversionFactor;
+  if (camMod == true) {
+    if (compositeArray[1].shape == "cam") {
+      changeBody2(1);
+    } else if (compositeArray[1].shape == "shell") {
+      changeShell();
     }
-    else if(compositeArray[1].shape == "shell"){
-      changeShell()
-    }
-  }
-  else if(rackPinionMod == true && compositeArray[1].alternate == false){
-    changeBodyContinuous(1)
-  }
-  else if(crankMod){
-    changeBodyCircle(1)
-  }
-  else{
+  } else if (rackPinionMod == true && compositeArray[1].alternate == false) {
+    changeBodyContinuous(1);
+  } else if (crankMod) {
+    changeBodyCircle(1);
+  } else {
     changeBody(1);
   }
-  if(crankMod == true){
-    createConstraint2(compositeArray[1].bodies[0], compositeArray[0].bodies[0])
+  if (crankMod == true) {
+    createConstraint2(compositeArray[1].bodies[0], compositeArray[0].bodies[0]);
   }
-  if(rackPinionMod == true){
-    compositeArray[1].constraints[0].pointA.x = (window.innerWidth)*(0.75*0.5)+(radius+(toothHeight*1.8))
+  if (rackPinionMod == true) {
+    compositeArray[1].constraints[0].pointA.x =
+      window.innerWidth * (0.75 * 0.5) + (radius + toothHeight * 1.8);
   }
   // document.getElementById("")
-  pivotHeight(constraintLength)
-}
-function mediumGear(){
-  deleteConstraint(compositeArray[1].bodies[0], compositeArray[0].bodies[0])
-  Body.setPosition(compositeArray[0].bodies[0], {x:compositeArray[0].constraints[0].pointA.x, y:compositeArray[0].constraints[0].pointA.y} )
-  Body.setAngle(compositeArray[1].bodies[0], 0)
-  radius = 64;
-  if(crankMod){
-    radius = radius + 52
-  }
-  compositeArray[1].radius = radius;
-  steps = (0.25 * radius)*2;
-  toothWidthDegree = 3;
-  toothWidth = (toothWidthDegree/conversionFactor);
-  if(camMod == true){
-    if(compositeArray[1].shape == "cam"){
-      changeBody2(1)
-    }
-    else if(compositeArray[1].shape == "shell"){
-      changeShell()
-    }
-  }
-  else if(rackPinionMod == true && compositeArray[1].alternate == false){
-    changeBodyContinuous(1)
-  }
-  else if(crankMod){
-    changeBodyCircle(1)
-  }
-  else{
-    changeBody(1);
-  }
-  console.log(compositeArray[0].bodies[0].position.x);
-  if(crankMod == true){
-    createConstraint2(compositeArray[1].bodies[0], compositeArray[0].bodies[0])
-  }
-  if(rackPinionMod == true){
-    compositeArray[1].constraints[0].pointA.x = (window.innerWidth)*(0.75*0.5)+(radius+(toothHeight*1.8))
-  }
-  
-  pivotHeight(constraintLength)
-}
-function largeGear(){
-  deleteConstraint(compositeArray[1].bodies[0], compositeArray[0].bodies[0])
-  Body.setPosition(compositeArray[0].bodies[0], {x:compositeArray[0].constraints[0].pointA.x, y:compositeArray[0].constraints[0].pointA.y} )
-  Body.setAngle(compositeArray[1].bodies[0], 0)
-  radius = 80;
-  if(crankMod){
-    radius = radius + 52
-  }
-  compositeArray[1].radius = radius;
-  steps = (0.25 * radius)*2;
-  toothWidthDegree = 2;
-  toothWidth = (toothWidthDegree/conversionFactor);
-  if(camMod == true){
-    if(compositeArray[1].shape == "cam"){
-      changeBody2(1)
-    }
-    else if(compositeArray[1].shape == "shell"){
-      changeShell()
-    }
-  }
-  else if(rackPinionMod == true && compositeArray[1].alternate == false){
-    changeBodyContinuous(1)
-  }
-  else if(crankMod){
-    changeBodyCircle(1)
-  }
-  else{
-    changeBody(1);
-  }
-  if(crankMod == true){
-    createConstraint2(compositeArray[1].bodies[0], compositeArray[0].bodies[0])
-  }
-  if(rackPinionMod == true){
-    compositeArray[1].constraints[0].pointA.x = (window.innerWidth)*(0.75*0.5)+(radius+(toothHeight*1.8))
-  }
-  
-  pivotHeight(constraintLength)
+  pivotHeight(constraintLength);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // initialize or reset specific module
@@ -266,28 +189,29 @@ function circleJointHeight(value){
   if(crankMod){
     changeHeightValue = parseInt(value)
     Body.setAngle(compositeArray[1].bodies[0], 0)
-    for(var i = 0; i<jointComposites.length; i++){
-      if(jointComposites[i].constraints[0].bodyA == compositeArray[0].bodies[0] && jointComposites[i].constraints[0].bodyB == compositeArray[1].bodies[0]){
-        jointComposites[i].constraints[0].length = 350 + changeHeightValue
-        jointComposites[i].constraints[0].render.lineWidth = 2
-        jointComposites[i].constraints[0].render.strokeStyle = "#666"
-        console.log(jointComposites[i].constraints[0].length)
+    for(joint of jointComposites){
+      if(joint.constraints[0].bodyA == compositeArray[0].bodies[0] && joint.constraints[0].bodyB == compositeArray[1].bodies[0]){
+        joint.constraints[0].length = 350 + changeHeightValue
+        joint.constraints[0].render.lineWidth = 2
+        joint.constraints[0].render.strokeStyle = "#666"
+        console.log(joint.constraints[0].length)
       }
-      else if(jointComposites[i].constraints[0].bodyA == compositeArray[1].bodies[0] && jointComposites[i].constraints[0].bodyB == compositeArray[0].bodies[0]){
-        jointComposites[i].constraints[0].length = 350 + changeHeightValue
-        jointComposites[i].constraints[0].render.lineWidth = 2
-        jointComposites[i].constraints[0].render.strokeStyle = "#666"
-        console.log(jointComposites[i].constraints[0].length)
+      else if(joint.constraints[0].bodyA == compositeArray[1].bodies[0] && joint.constraints[0].bodyB == compositeArray[0].bodies[0]){
+        joint.constraints[0].length = 350 + changeHeightValue
+        joint.constraints[0].render.lineWidth = 2
+        joint.constraints[0].render.strokeStyle = "#666"
+        console.log(joint.constraints[0].length)
       }
+      
     }
     constraintLength = parseInt(value)
   }
   
 }
 // set horizontal spacing
-var prevSpaceValue = 50;
-var changeSpaceWidth = 0;
-var spaceValue = 50
+let prevSpaceValue = 50;
+let changeSpaceWidth = 0;
+const spaceValue = 50
 function beamSpacing(value){
   changeSpaceWidth = value - prevSpaceValue
   prevSpaceValue = value
@@ -298,10 +222,10 @@ function beamSpacing(value){
   
 }
 
-var prevPivotValue = 100;
-var initialPivotValue = 100;
-var pivotValue = 100;
-var changePivotHeight;
+let prevPivotValue = 100;
+const initialPivotValue = 100;
+let pivotValue = 100;
+let changePivotHeight;
 // set vertical spacing
 function pivotHeight(value){
   if(crankMod){
@@ -329,7 +253,7 @@ function pivotHeight(value){
   
 }
 function yDistance(){
-  var distance = Math.round(compositeArray[0].bodies[0].position.y-200)
+  const distance = Math.round(compositeArray[0].bodies[0].position.y-200)
   document.getElementById("y-distance").innerHTML = distance
 }
 // set radius to original radius -52

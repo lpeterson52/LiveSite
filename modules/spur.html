@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 include('../wp-blog-header.php');
 
 global $user_identity;
@@ -9,7 +9,7 @@ else{
     //die('Sorry, you must be <a href="'. get_bloginfo('home') . '/wp-login.php?redirect_to=' . $_SERVER['PHP_SELF'] . '">logged in</a> to view this page.');
 }
 //echo do_shortcode( '[contact-form-7 id="1234" title="Contact form 1"]' );
-?>
+?> -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -158,42 +158,42 @@ else{
             <div class = "rotate">
                 <p>Gear 1 Size:</p>
                 <br>
-                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGear1" onclick="smallGear1()">1</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setMedGear1" onclick="mediumGear1()">2</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGear1" onclick="largeGear1()">3</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGear1" onclick="changeGear1(48)">1</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setMedGear1" onclick="changeGear1(64)">2</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGear1" onclick="changeGear1(80)">3</button>
             </div>
             <br class = "rotate">
             <div class = "rotate">
                 <p>Gear 2 Size:</p>
                 <br>
-                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGear2" onclick="smallGear2()">1</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setMedGear2" onclick="mediumGear2()">2</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGear2" onclick="largeGear2()">3</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGear2" onclick="changeGear2(48)">1</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setMedGear2" onclick="changeGear2(64)">2</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGear2" onclick="changeGear2(80)">3</button>
             </div>
             <br class = "rotate">
             <div class = "rotate">
                 <p>Gear 3 Size:</p>
                 <br>
-                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGear3" onclick="smallGear3()">1</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setMedGear3" onclick="mediumGear3()">2</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGear3" onclick="largeGear3()">3</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGear3" onclick="changeGear3(48)">1</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setMedGear3" onclick="changeGear3(64)">2</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGear3" onclick="changeGear3(80)">3</button>
             </div>
             <br class = "rotate">
 
             <div class = "flapping">
                 <p>Left Gear Size:</p>
                 <br>
-                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGearL" onclick="smallGearL()">1</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setMedGearL" onclick="mediumGearL()">2</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGearL" onclick="largeGearL()">3</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGearL" onclick="changeGearL(48)">1</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setMedGearL" onclick="changeGearL(64)">2</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGearL" onclick="changeGearL(80)">3</button>
             </div>
             <br class = "flapping">
             <div class = "flapping">
                 <p>Right Gear Size:</p>
                 <br>
-                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGearR" onclick="smallGearR()">1</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setMedGearR" onclick="mediumGearR()">2</button>
-                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGearR" onclick="largeGearR()">3</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setSmallGearR" onclick="changeGearR(48)">1</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setMedGearR" onclick="changeGearR(64)">2</button>
+                <button class = "gear-size object btn btn-primary" type="button" id="setLargeGearR" onclick="changeGearR(80)">3</button>
             </div>
             <br class = "flapping">
             <div>
