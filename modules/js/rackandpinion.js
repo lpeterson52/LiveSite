@@ -559,7 +559,7 @@ function alternatingGear() {
 // horizontal spacing
 let prevSpaceValue = 50;
 let changeSpaceWidth = 0;
-var beamSpace = 50;
+beamSpace = 50;
 let modified = false;
 function beamSpacing(value) {
   changeSpaceWidth = value - prevSpaceValue;

@@ -122,7 +122,7 @@ function changeMotion() {
 let prevSpaceValue = 50;
 let changeSpaceWidth = 0;
 var spaceValue = 50;
-var beamSpace = 50;
+beamSpace = 50;
 // horizontal spacing function
 function beamSpacing(value) {
   changeSpaceWidth = value - prevSpaceValue;
