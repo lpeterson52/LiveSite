@@ -4,8 +4,6 @@ let c = 369; //connector length
 const rectBase = 600;
 let originalWidth1;
 let originalWidth2;
-var newWidth1;
-var newWidth2;
 module.verticalSpace = 0;
 // generate small gear
 ///////////////////////////GEAR SIZE///////////////////////////////////

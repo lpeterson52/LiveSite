@@ -1,5 +1,5 @@
 ////////////// Add Libraries! /////////////
-var Engine = Matter.Engine,
+const Engine = Matter.Engine,
   World = Matter.World,
   Body = Matter.Body,
   Bodies = Matter.Bodies,
@@ -18,10 +18,10 @@ var Engine = Matter.Engine,
   Mouse = Matter.Mouse;
 
 ////////////// Create Matter Engine /////////
-var engine = Engine.create();
+const engine = Engine.create();
 
 ///////////// Create Renderer //////////////
-var render = Render.create({
+const render = Render.create({
   element: document.body,
   engine: engine,
   options: {
@@ -30,7 +30,7 @@ var render = Render.create({
     width: window.innerWidth * 0.75,
   },
 });
-var runner = Runner.create();
+const runner = Runner.create();
 //////// create mouse dragging //////////
 // var mouseConstraint = MouseConstraint.create(engine);
 var world = engine.world;
@@ -41,7 +41,7 @@ engine.world.gravity.y = 0;
 
 ///////////////////// VARIABLES //////////////////////////////////////
 // Modules
-var openCloseModule = false,
+let openCloseModule = false,
   upDownModule = false,
   flapModule = false,
   rackPinionModule = false,
@@ -52,46 +52,43 @@ var openCloseModule = false,
   spurModule = false,
   walkingModule = false;
 // Collision Groups
-var collisionCategory = 0x0001,
+const collisionCategory = 0x0001,
   otherCategory = 0x0002;
 
 // Constraint Variables
-var constraintStart;
-var constraintDestination;
+let constraintStart;
+let constraintDestination;
 // Point Arrays
-var xValues = [];
-var yValues = [];
-var verts2 = [];
-var linGearVerts = [];
-var motors = [];
-var circlePoints1 = [];
-var circlePoints2 = [];
+const xValues = [];
+const yValues = [];
+let verts2 = [];
+let linGearVerts = [];
 // Object Variables
-var steps = 40;
-var linSteps = 30;
-var centerX = 100;
-var centerY = 100;
-var radius = 80;
-var conversionFactor = 360 / (2 * Math.PI);
-var toothHeight = 0.25 * 64;
-var toothWidthDegree = 2;
-var toothWidth = toothWidthDegree / conversionFactor;
+let steps = 40;
+const linSteps = 30;
+const centerX = 100;
+const centerY = 100;
+let radius = 80;
+const conversionFactor = 360 / (2 * Math.PI);
+const toothHeight = 0.25 * 64;
+let toothWidthDegree = 2;
+let toothWidth = toothWidthDegree / conversionFactor;
 // Module States Variables
-var openCloseMod = false;
-var crankMod = false;
-var mirrored = false;
-var paired = false;
-var shared = false;
-var flipY = false;
+let openCloseMod = false,
+  crankMod = false,
+  mirrored = false,
+  paired = false,
+  shared = false,
+  flipY = false;
 // Module Distance Variables
-var screenScale = window.innerHeight / 1011;
-var basePoint = 450 * (screenScale - 0.7);
-var rackPinBase = 300 * (1 - screenScale);
-var beamSpace = 50;
-var verticalSpacing = 100;
+const screenScale = window.innerHeight / 1011;
+const basePoint = 450 * (screenScale - 0.7);
+const rackPinBase = 300 * (1 - screenScale);
+let beamSpace = 50;
+let verticalSpacing = 100;
 
 // Module Slider Values
-var module = {
+let module = {
   horizontalSpace: 50,
   verticalSpace: 0,
   connectorLength: 369,
@@ -109,24 +106,23 @@ var module = {
   spurBeamLength: 0,
 };
 // Other
-var newWidth1;
-var newWidth2;
-var paused = false;
-var pivot2Value;
-var mirrored = false;
-var gear1Spacing = 0;
-var gear2Spacing = 0;
-var flapConnectorL = 0;
-var flapConnectorR = 0;
-var symetrical = true;
-var leftWingUI = true;
-var planetaryBrace = 0;
-var planetaryMod = 0;
-var linkageLength = 111;
-var walkingVert = 0;
-var walkingVerticalValue = 63;
-var triangleHeight = 100;
-var triangleWidth = 100;
+let newWidth1;
+let newWidth2;
+let paused = false;
+let pivot2Value;
+let gear1Spacing = 0;
+let gear2Spacing = 0;
+let flapConnectorL = 0;
+let flapConnectorR = 0;
+let symetrical = true;
+let leftWingUI = true;
+let planetaryBrace = 0;
+let planetaryMod = 0;
+let linkageLength = 111;
+let walkingVert = 0;
+let walkingVerticalValue = 63;
+const triangleHeight = 100;
+const triangleWidth = 100;
 
 ////////////////////// CREATE VERtiCES TO DRAW SHAPES //////////////
 function drawGear() {
@@ -3147,7 +3143,7 @@ function flapVerticalSpace(value) {
   compositeArray[3].constraints[0].pointA.y =
     compositeArray[0].constraints[0].pointA.y - (module.verticalSpace + 150);
 }
-var pivot2Value = 50;
+pivot2Value = 50;
 var changePivot2Height;
 var prevPivot2Value = 0;
 // SKIP FOR NOW
@@ -3609,7 +3605,10 @@ Events.on(engine, "beforeUpdate", function (event) {
           compositeArray[i].bodies[0].parts[j].render.fillStyle = "#cccccc";
         }
         // if object size is small give it specific fill color and image sprite if applicable
-        if (compositeArray[i].radius === 48 || compositeArray[i].radius === 100) {
+        if (
+          compositeArray[i].radius === 48 ||
+          compositeArray[i].radius === 100
+        ) {
           compositeArray[i].bodies[0].parts[j].render.fillStyle = "#FF6B6B";
           for (var k = 0; k < compositeArray.length; k++) {
             if (compositeArray[k].bodies[1]) {
