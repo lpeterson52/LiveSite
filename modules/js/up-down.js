@@ -21,23 +21,23 @@ function changeGear(rad) {
   steps = 0.25 * radius * 2;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
-  if (camMod == true) {
-    if (compositeArray[1].shape == "cam") {
+  if (camMod === true) {
+    if (compositeArray[1].shape === "cam") {
       changeBody2(1);
-    } else if (compositeArray[1].shape == "shell") {
+    } else if (compositeArray[1].shape === "shell") {
       changeShell();
     }
-  } else if (rackPinionMod == true && compositeArray[1].alternate == false) {
+  } else if (rackPinionMod === true && compositeArray[1].alternate === false) {
     changeBodyContinuous(1);
   } else if (crankMod) {
     changeBodyCircle(1);
   } else {
     changeBody(1);
   }
-  if (crankMod == true) {
+  if (crankMod === true) {
     createConstraint2(compositeArray[1].bodies[0], compositeArray[0].bodies[0]);
   }
-  if (rackPinionMod == true) {
+  if (rackPinionMod === true) {
     compositeArray[1].constraints[0].pointA.x =
       window.innerWidth * (0.75 * 0.5) + (radius + toothHeight * 1.8);
   }
@@ -129,21 +129,21 @@ function crank(){
 // change module if dropdown changes
 function changeMech(){
   var string = document.getElementById("changeMech").value;
-  if(string == "rack-pinion"){
+  if(string === "rack-pinion"){
     rackPinionMod = true;
     camMod = false;
     crankMod = false;
     rackPinion();
     compositeArray[0].constraints[0].stiffness = 0.001
   }
-  else if(string == "cam"){
+  else if(string === "cam"){
     camMod = true;
     crankMod = false;
     rackPinionMod = false;
     cam();
     compositeArray[0].constraints[0].stiffness = 0.005
   }
-  else if(string == "crank"){
+  else if(string === "crank"){
     crankMod = true;
     camMod = false;
     rackPinionMod = false;
@@ -164,7 +164,7 @@ function continuous(){
   else{
     compositeArray[1].alternate = false;
   }
-  if(compositeArray[1].shape == "shell"){
+  if(compositeArray[1].shape === "shell"){
     compositeArray[1].motorDir = -1;
   }
 }
@@ -190,13 +190,13 @@ function circleJointHeight(value){
     changeHeightValue = parseInt(value)
     Body.setAngle(compositeArray[1].bodies[0], 0)
     for(joint of jointComposites){
-      if(joint.constraints[0].bodyA == compositeArray[0].bodies[0] && joint.constraints[0].bodyB == compositeArray[1].bodies[0]){
+      if(joint.constraints[0].bodyA === compositeArray[0].bodies[0] && joint.constraints[0].bodyB === compositeArray[1].bodies[0]){
         joint.constraints[0].length = 350 + changeHeightValue
         joint.constraints[0].render.lineWidth = 2
         joint.constraints[0].render.strokeStyle = "#666"
         console.log(joint.constraints[0].length)
       }
-      else if(joint.constraints[0].bodyA == compositeArray[1].bodies[0] && joint.constraints[0].bodyB == compositeArray[0].bodies[0]){
+      else if(joint.constraints[0].bodyA === compositeArray[1].bodies[0] && joint.constraints[0].bodyB === compositeArray[0].bodies[0]){
         joint.constraints[0].length = 350 + changeHeightValue
         joint.constraints[0].render.lineWidth = 2
         joint.constraints[0].render.strokeStyle = "#666"
@@ -269,7 +269,7 @@ function resetRadius(){
 }
 // set radius for crank +52
 function crankRadius(){
-  if(radius == 80 || radius == 64 || radius == 48){
+  if(radius === 80 || radius === 64 || radius === 48){
       radius = radius + 52
     }
 }

@@ -14,7 +14,7 @@ function changeBodyFlap(index) {
     Composite.remove(compositeArray[index], compositeArray[index].bodies[0]);
     // store x and y constraint position
     let tmpConstraintXPoint;
-    if (index == 0) {
+    if (index === 0) {
       tmpConstraintXPoint =
         window.innerWidth * (0.75 * 0.5) - (radius + toothHeight * 0.6);
     } else {
@@ -37,7 +37,7 @@ function changeBodyFlap(index) {
       Bodies.fromVertices(tmpConstraintXPoint, tmpConstraintYPoint, [verts2])
     );
     // add circle for ui motor sprite
-    if (compositeArray[index].shape == "gear") {
+    if (compositeArray[index].shape === "gear") {
       Composite.add(
         compositeArray[index],
         Bodies.circle(tmpConstraintXPoint, tmpConstraintYPoint, 1)

@@ -56,7 +56,7 @@ Events.on(engine, "afterUpdate", function (event) {
     y: centerPosY,
   });
 
-  if (init == false) {
+  if (init === false) {
     Body.setAngle(compositeArray[1].bodies[0], degrees(-90));
   }
 
@@ -112,7 +112,7 @@ Events.on(engine, "afterUpdate", function (event) {
   const yEq2 = Math.asin((pivotRad * Math.sin(Math.PI - crankAngle2)) / x2);
   const triangleRot2 = xEq2 + yEq2;
 
-  if (init == false) {
+  if (init === false) {
     initAngle1 = xEq1 + yEq1;
     initAngle2 = xEq2 + yEq2;
     // console.log()

@@ -99,7 +99,7 @@ function crank() {
 // run this function when change motion from dropdown
 function changeMotion() {
   const string = document.getElementById("changeMech").value;
-  if (string == "upDown") {
+  if (string === "upDown") {
     openCloseMod = false;
     removeUIConstraints(compositeArray[0]);
     deleteConstraint(compositeArray[2].bodies[0], compositeArray[0].bodies[0]);
@@ -107,7 +107,7 @@ function changeMotion() {
     removeComposite(compositeArray[3].bodies[0]);
     removeComposite(compositeArray[2].bodies[0]);
     compositeArray[1].constraints[0].pointA.y = window.innerHeight * 0.7;
-  } else if (string == "openClose") {
+  } else if (string === "openClose") {
     openCloseMod = true;
     createUIConstraints(compositeArray[0], beamSpace, 0, 6);
     addRectComposite(
@@ -241,15 +241,15 @@ function circleJointHeight(value) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   for (let i = 0; i < jointComposites.length; i++) {
     if (
-      jointComposites[i].constraints[0].bodyA == compositeArray[0].bodies[0] &&
-      jointComposites[i].constraints[0].bodyB == compositeArray[1].bodies[0]
+      jointComposites[i].constraints[0].bodyA === compositeArray[0].bodies[0] &&
+      jointComposites[i].constraints[0].bodyB === compositeArray[1].bodies[0]
     ) {
       jointComposites[i].constraints[0].length = 350 + changeHeightValue;
       jointComposites[i].constraints[0].render.lineWidth = 2;
       jointComposites[i].constraints[0].render.strokeStyle = "#666";
     } else if (
-      jointComposites[i].constraints[0].bodyA == compositeArray[1].bodies[0] &&
-      jointComposites[i].constraints[0].bodyB == compositeArray[0].bodies[0]
+      jointComposites[i].constraints[0].bodyA === compositeArray[1].bodies[0] &&
+      jointComposites[i].constraints[0].bodyB === compositeArray[0].bodies[0]
     ) {
       jointComposites[i].constraints[0].length = 350 + changeHeightValue;
       jointComposites[i].constraints[0].render.lineWidth = 2;
@@ -275,7 +275,7 @@ function resetRadius() {
 }
 // set radius to normal +52
 function crankRadius() {
-  if (radius == 80 || radius == 64 || radius == 48) {
+  if (radius === 80 || radius === 64 || radius === 48) {
     radius = radius + 52;
   }
 }
@@ -333,7 +333,7 @@ Events.on(engine, "afterUpdate", function (event) {
     }
     Body.setVelocity(compositeArray[2].bodies[0], { x: 0, y: 0 });
     Body.setVelocity(compositeArray[3].bodies[0], { x: 0, y: 0 });
-    if (compositeArray[1].alternate == false && rackPinionMod == true) {
+    if (compositeArray[1].alternate === false && rackPinionMod === true) {
       if (compositeArray[1].bodies[0].angle >= 2 * Math.PI) {
         Body.setAngle(compositeArray[1].bodies[0], 0);
       }
