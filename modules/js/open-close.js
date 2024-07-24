@@ -8,7 +8,7 @@ let c = 369;
 const rectBase = 600;
 linkageLength = 0;
 ////////////////////GEAR SIZES/////////////////////////////////////
-function gear(rad) {
+function changeGear(rad) {
   // remove UI bodies
   removeUIConstraints(compositeArray[0]);
   // remove linkage constraints
@@ -76,7 +76,7 @@ function gear(rad) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // reset/initialize rack and pinion motion
-function rackPinion() {
+function initializeRackPinion() {
   updateToothWidth();
   resetRadius();
   // remove ui body constraints/linkages
@@ -127,7 +127,7 @@ function rackPinion() {
   pivotHeight(linkageLength);
 }
 // reset/initialize cam motion
-function cam() {
+function initializeCam() {
   resetRadius();
   // remove ui body constraints/linkages
   removeUIConstraints(compositeArray[0]);
@@ -175,7 +175,7 @@ function cam() {
   createUIConstraints(compositeArray[0], beamSpace, 0, 6);
 }
 // reset/initialize crank motion
-function crank() {
+function initializeCrank() {
   // remove ui constraints
   removeUIConstraints(compositeArray[0]);
   // set radius to +52
@@ -238,24 +238,24 @@ function changeMech() {
     rackPinionMod = true;
     camMod = false;
     crankMod = false;
-    rackPinion();
+    initializeRackPinion();
     compositeArray[0].constraints[0].stiffness = 0.001;
   } else if (string === "cam") {
     camMod = true;
     crankMod = false;
     rackPinionMod = false;
-    cam();
+    initializeCam();
     compositeArray[0].constraints[0].stiffness = 0.01;
   } else if (string === "crank") {
     crankMod = true;
     camMod = false;
     rackPinionMod = false;
-    crank();
+    initializeCrank();
     compositeArray[0].constraints[0].stiffness = 0.001;
   }
 }
 // change system to 360/ continuous gear and motor
-function continuous() {
+function setToContinuous() {
   if (rackPinionMod) {
     compositeArray[1].alternate = false;
     changeBodyContinuous(1);
@@ -270,7 +270,7 @@ function continuous() {
   }
 }
 // change system to 180/ alternating gear and motor
-function alternatingGear() {
+function setToAlternatingGear() {
   if (rackPinionMod) {
     changeBody(1);
     Body.setPosition(compositeArray[0].bodies[0], {
