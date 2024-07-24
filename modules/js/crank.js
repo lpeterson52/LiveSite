@@ -8,12 +8,13 @@ const rectBase = 600;
 linkageLength = 0;
 let originalWidth1;
 let originalWidth2;
-const windowWidthConst = 0.75 * 0.45;
+const kWindowWidth = 0.75 * 0.45;
 /////////////////////////// CHANGE GEAR SIZE ///////////////////////////////////////////
 //smallRadius = 48
 //mediumRadius = 64
 //largeRadius = 80
-function changeGear(rad) {
+const kSteps = 0.5
+function changeGear(rad) {;
   //remove ui constraints
   removeUIConstraints(compositeArray[0]);
   // delete linkages
@@ -33,7 +34,7 @@ function changeGear(rad) {
   // set class parameter value
   compositeArray[1].radius = radius;
   // set number of steps to make up gear
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   // set specific tooth width
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
@@ -63,7 +64,7 @@ function initializeCrank() {
   crankRadius();
   // remove constraint between crank and UI
   deleteConstraint(compositeArray[1].bodies[0], compositeArray[0].bodies[0]);
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 2;
   toothWidth = toothWidthDegree / conversionFactor;
   // change body shapes - functions.js
@@ -73,7 +74,7 @@ function initializeCrank() {
   createUIConstraints(compositeArray[0], beamSpace, 0, 6);
   // set position of new shapes
   Body.setPosition(compositeArray[0].bodies[0], {
-    x: window.innerWidth * windowWidthConst,
+    x: window.innerWidth * kWindowWidth,
     y:
       window.innerHeight -
       basePoint -
@@ -82,13 +83,13 @@ function initializeCrank() {
       parseInt(pivotValue),
   });
   Body.setPosition(compositeArray[1].bodies[0], {
-    x: window.innerWidth * windowWidthConst,
+    x: window.innerWidth * kWindowWidth,
     y: window.innerHeight - basePoint,
   });
   // set constraint locations
-  compositeArray[1].constraints[0].pointA.x = window.innerWidth * windowWidthConst;
+  compositeArray[1].constraints[0].pointA.x = window.innerWidth * kWindowWidth;
   compositeArray[1].constraints[0].pointA.y = window.innerHeight * 0.7;
-  compositeArray[0].constraints[0].pointA.x = window.innerWidth * windowWidthConst;
+  compositeArray[0].constraints[0].pointA.x = window.innerWidth * kWindowWidth;
   compositeArray[0].constraints[0].pointA.y =
     compositeArray[1].constraints[0].pointA.y - 250;
   // create linkages
@@ -114,13 +115,13 @@ function changeMotion() {
     addRectComposite(
       300,
       5,
-      window.innerWidth * windowWidthConst - 200,
+      window.innerWidth * kWindowWidth - 200,
       compositeArray[0].constraints[0].pointA.y - rectBase
     );
     addRectComposite(
       -300,
       5,
-      window.innerWidth * windowWidthConst + 200,
+      window.innerWidth * kWindowWidth + 200,
       compositeArray[0].constraints[0].pointA.y - rectBase
     );
     originalWidth1 = compositeArray[2].width;
@@ -128,7 +129,7 @@ function changeMotion() {
     newWidth1 = originalWidth1;
     newWidth2 = originalWidth2;
     Body.setPosition(compositeArray[0].bodies[0], {
-      x: window.innerWidth * windowWidthConst,
+      x: window.innerWidth * kWindowWidth,
       y:
         window.innerHeight -
         basePoint -
@@ -137,14 +138,14 @@ function changeMotion() {
         parseInt(pivotValue),
     });
     Body.setPosition(compositeArray[1].bodies[0], {
-      x: window.innerWidth * windowWidthConst,
+      x: window.innerWidth * kWindowWidth,
       y: window.innerHeight - basePoint,
     });
     compositeArray[1].constraints[0].pointA.x =
-      window.innerWidth * windowWidthConst;
+      window.innerWidth * kWindowWidth;
     compositeArray[1].constraints[0].pointA.y = window.innerHeight - basePoint;
     compositeArray[0].constraints[0].pointA.x =
-      window.innerWidth * windowWidthConst;
+      window.innerWidth * kWindowWidth;
     compositeArray[0].constraints[0].pointA.y =
       compositeArray[1].constraints[0].pointA.y - 250;
     compositeArray[2].constraints[0].pointA.y =
@@ -364,13 +365,13 @@ Events.on(engine, "beforeUpdate", function (event) {});
 
 // create initial gear parts
 addLinGearComposite(
-  window.innerWidth * windowWidthConst,
+  window.innerWidth * kWindowWidth,
   window.innerHeight * 0.8 + rackPinBase
 );
 compositeArray[0].constraints[0].stiffness = 0.0000001;
 createUIConstraints(compositeArray[0], prevSpaceValue, prevPivotValue, 6);
 addGearComposite(
-  window.innerWidth * windowWidthConst + (radius + toothHeight * 2),
+  window.innerWidth * kWindowWidth + (radius + toothHeight * 2),
   window.innerHeight * 0.68 + rackPinBase
 );
 compositeArray[1].isMotor = true;

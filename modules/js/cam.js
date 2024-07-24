@@ -8,15 +8,15 @@ let pivotValue = 0;
 let c = 432; //Connector Length for open-close
 let originalWidth1;
 let originalWidth2;
-const windowWidthConst = 0.75 * 0.5;
-const windowHeightConst = 0.75;
+const kWindowWidth = 0.75 * 0.5;
+const kWindowHeight = 0.75;
 
 ////////////CHANGE GEAR SIZES///////////////////////////////////
 //smallRadius = 48
 //mediumRadius = 64
 //largeRadius = 80
 function changeGear(rad) {
-  const stepConst = 0.5;
+  const kSteps = 0.5;
   deleteConstraint(compositeArray[1].bodies[0], compositeArray[0].bodies[0]);
   Body.setPosition(compositeArray[0].bodies[0], {
     x: compositeArray[0].constraints[0].pointA.x,
@@ -25,7 +25,7 @@ function changeGear(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[1].radius = radius;
-  steps = radius * stepConst;
+  steps = radius * kSteps;
   toothWidthDegree = 2;
   toothWidth = toothWidthDegree / conversionFactor;
   if (compositeArray[1].shape === "cam") {
@@ -36,7 +36,7 @@ function changeGear(rad) {
 }
 //////////////////////////////////////////////////////////////////////////
 //inializes/resets cam module
-function cam() {
+function initializeCam() {
   //reset steps
   steps = 40;
   //reset width
@@ -47,19 +47,19 @@ function cam() {
   changeBody2(1);
   //set positions
   Body.setPosition(compositeArray[0].bodies[0], {
-    x: window.innerWidth * windowWidthConst,
+    x: window.innerWidth * kWindowWidth,
     y: compositeArray[1].constraints[0].pointA.y - 200,
   });
   Body.setPosition(compositeArray[1].bodies[0], {
-    x: window.innerWidth * windowWidthConst,
-    y: window.innerHeight * windowHeightConst,
+    x: window.innerWidth * kWindowWidth,
+    y: window.innerHeight * kWindowHeight,
   });
   //set constraint positions
   compositeArray[1].constraints[0].pointA.x =
-    window.innerWidth * windowWidthConst;
-  compositeArray[1].constraints[0].pointA.y = window.innerHeight * windowHeightConst;
+    window.innerWidth * kWindowWidth;
+  compositeArray[1].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
   compositeArray[0].constraints[0].pointA.x =
-    window.innerWidth * windowWidthConst;
+    window.innerWidth * kWindowWidth;
   compositeArray[0].constraints[0].pointA.y =
     compositeArray[1].constraints[0].pointA.y - 60;
   //set as continuous gear
@@ -97,13 +97,13 @@ function changeMotion() {
     addRectComposite(
       300,
       5,
-      window.innerWidth * windowWidthConst - 200,
+      window.innerWidth * kWindowWidth - 200,
       compositeArray[0].constraints[0].pointA.y - 400
     );
     addRectComposite(
       -300,
       5,
-      window.innerWidth * windowWidthConst + 200,
+      window.innerWidth * kWindowWidth + 200,
       compositeArray[0].constraints[0].pointA.y - 400
     );
     // create two ui orbs
@@ -126,11 +126,11 @@ function changeMotion() {
 // initial values for beam parameters
 let prevSpaceValue = 50;
 let changeSpaceWidth = 0;
-var spaceValue = 50;
+spaceValue = 50;
 beamSpace = 50;
 //rendering consts
-const lineWidth = 2;
-const strokeStyle = "#666";
+const kLineWidth = 2;
+const kStrokeStyle = "#666";
 // horizontal spacing function
 function beamSpacing(value) {
   changeSpaceWidth = value - prevSpaceValue;
@@ -153,8 +153,8 @@ function beamSpacing(value) {
   prevSpaceValue = value;
   beamSpace = parseInt(value);
   // change constraint color back to normal
-  compositeArray[0].constraints[1].render.lineWidth = lineWidth;
-  compositeArray[0].constraints[1].render.strokeStyle = strokeStyle;
+  compositeArray[0].constraints[1].render.lineWidth = kLineWidth;
+  compositeArray[0].constraints[1].render.strokeStyle = kStrokeStyle;
 }
 // initial pivot values
 let prevPivotValue = 100;
@@ -250,7 +250,7 @@ addGearComposite(
 compositeArray[1].isMotor = true;
 compositeArray[1].alternate = true;
 // change lingear shape to cam shape
-cam();
+initializeCam();
 compositeArray[0].constraints[0].stiffness = 0.01;
 // run the engine
 // Engine.run(engine);
