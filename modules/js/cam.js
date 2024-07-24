@@ -216,8 +216,10 @@ Events.on(engine, "afterUpdate", function (event) {
     const a = compositeArray[2].width;
     const angleC = Math.acos((a * a + b * b - c * c) / (2 * a * b));
     // update beam rotation angle
-    Body.setAngle(compositeArray[2].bodies[0], angleC - 1.5708);
-    Body.setAngle(compositeArray[3].bodies[0], -(angleC - 1.5708));
+    if (angleC) {
+      Body.setAngle(compositeArray[2].bodies[0], angleC - 1.5708);
+      Body.setAngle(compositeArray[3].bodies[0], -(angleC - 1.5708));
+    }
     // prevent any movement on x and y axis
     Body.setVelocity(compositeArray[2].bodies[0], { x: 0, y: 0 });
     Body.setVelocity(compositeArray[3].bodies[0], { x: 0, y: 0 });
