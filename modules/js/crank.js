@@ -12,7 +12,7 @@ let originalWidth2;
 //smallRadius = 48
 //mediumRadius = 64
 //largeRadius = 80
-function gear(rad) {
+function changeGear(rad) {
   //remove ui constraints
   removeUIConstraints(compositeArray[0]);
   // delete linkages
@@ -55,7 +55,7 @@ function gear(rad) {
 }
 ////////////////////////////////////////////////////////////////////////////////////////
 // module initialization/ reset function
-function crank() {
+function initializeCrank() {
   // remove any UI elements
   removeUIConstraints(compositeArray[0]);
   // set radius to +52
@@ -162,17 +162,17 @@ function changeMotion() {
   }
 }
 // make motor 360
-function continuous() {
+function setToContinuous() {
   compositeArray[1].alternate = false;
 }
 // make motor 180
-function alternatingGear() {
+function setToAlternatingGear() {
   compositeArray[1].alternate = true;
 }
 
 let prevSpaceValue = 50;
 let changeSpaceWidth = 0;
-var spaceValue = 50;
+spaceValue = 50;
 // horizontal spacing
 function beamSpacing(value) {
   if (compositeArray[2] && compositeArray[3]) {
@@ -189,9 +189,9 @@ function beamSpacing(value) {
   compositeArray[0].constraints[1].render.strokeStyle = "#666";
 }
 let prevPivotValue = 100;
-var initialPivotValue = 100;
+const initialPivotValue = 100;
 const pivotValue = 100;
-var changePivotHeight;
+let changePivotHeight;
 // vertical spacing
 function pivotHeight(value) {
   circleJointHeight(value);
@@ -304,15 +304,6 @@ Events.on(engine, "afterUpdate", function (event) {
       -parseInt(pivot2Value);
     jointComposites[jointComposites.length - 2].constraints[0].pointA.y =
       -parseInt(pivot2Value);
-    const a1 =
-      compositeArray[2].constraints[0].pointA.x -
-      300 * Math.cos(compositeArray[2].bodies[0].angle);
-    const b1 =
-      compositeArray[2].constraints[0].pointA.y -
-      300 * Math.sin(compositeArray[2].bodies[0].angle);
-    const a2 = compositeArray[0].bodies[1].position.x;
-    const b2 = compositeArray[0].bodies[1].position.y;
-    const d = Math.sqrt((a1 - a2) * (a1 - a2) + (b1 - b2) * (b1 - b2));
     const bottom = compositeArray[0].constraints[0].pointA.y - rectBase;
     const top = compositeArray[0].bodies[0].position.y - 200 - pivotValue;
     const b = top - bottom;
@@ -386,7 +377,7 @@ pivotHeight(0);
 crankMod = true;
 camMod = false;
 rackPinionMod = false;
-crank();
+initializeCrank();
 compositeArray[0].constraints[0].stiffness = 0.001;
 removeUIConstraints(compositeArray[0]);
 // Engine.run(engine);
