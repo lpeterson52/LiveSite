@@ -6,8 +6,10 @@ crankMod = false;
 // variable starting values
 let c = 369;
 const rectBase = 600;
+const kWindowWidth = 0.75 * 0.45;
 linkageLength = 0;
 ////////////////////GEAR SIZES/////////////////////////////////////
+const kSteps = 0.5;
 function changeGear(rad) {
   // remove UI bodies
   removeUIConstraints(compositeArray[0]);
@@ -34,7 +36,7 @@ function changeGear(rad) {
   // store new radius
   compositeArray[1].radius = radius;
   // define new number of steps
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   // if cam motion then change body with specific function
@@ -68,7 +70,7 @@ function changeGear(rad) {
   }
   if (rackPinionMod === true) {
     compositeArray[1].constraints[0].pointA.x =
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8);
+      window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8);
   }
   // add ui constraints
   createUIConstraints(compositeArray[0], beamSpace, 0, 6);
@@ -86,13 +88,13 @@ function initializeRackPinion() {
   deleteConstraint(compositeArray[2].bodies[0], compositeArray[0].bodies[0]);
   deleteConstraint(compositeArray[3].bodies[0], compositeArray[0].bodies[0]);
   // set step size
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   // redraw and create gear and lingear
   changeBody4(0);
   changeBody(1);
   // set position of gear and lingear
   Body.setPosition(compositeArray[1].bodies[0], {
-    x: window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8),
+    x: window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8),
     y: window.innerHeight * 0.68 + rackPinBase,
   });
   Body.setPosition(compositeArray[0].bodies[0], {
@@ -101,10 +103,10 @@ function initializeRackPinion() {
   });
   // set constraint positions of gears and beams
   compositeArray[1].constraints[0].pointA.x =
-    window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8);
+    window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8);
   compositeArray[1].constraints[0].pointA.y =
     window.innerHeight * 0.68 + rackPinBase;
-  compositeArray[0].constraints[0].pointA.x = window.innerWidth * (0.75 * 0.45);
+  compositeArray[0].constraints[0].pointA.x = window.innerWidth * kWindowWidth;
   compositeArray[0].constraints[0].pointA.y =
     window.innerHeight * 0.8 + rackPinBase;
   compositeArray[2].constraints[0].pointA.y =
@@ -143,17 +145,17 @@ function initializeCam() {
   changeBody2(1);
   // set positions
   Body.setPosition(compositeArray[0].bodies[0], {
-    x: window.innerWidth * (0.75 * 0.45),
+    x: window.innerWidth * kWindowWidth,
     y: window.innerHeight * 0.6,
   });
   Body.setPosition(compositeArray[1].bodies[0], {
-    x: window.innerWidth * (0.75 * 0.45),
+    x: window.innerWidth * kWindowWidth,
     y: window.innerHeight - basePoint,
   });
   // set constraint positions
-  compositeArray[1].constraints[0].pointA.x = window.innerWidth * (0.75 * 0.45);
+  compositeArray[1].constraints[0].pointA.x = window.innerWidth * kWindowWidth;
   compositeArray[1].constraints[0].pointA.y = window.innerHeight - basePoint;
-  compositeArray[0].constraints[0].pointA.x = window.innerWidth * (0.75 * 0.45);
+  compositeArray[0].constraints[0].pointA.x = window.innerWidth * kWindowWidth;
   compositeArray[0].constraints[0].pointA.y =
     compositeArray[1].constraints[0].pointA.y - 60;
   compositeArray[2].constraints[0].pointA.y =
@@ -185,7 +187,7 @@ function initializeCrank() {
   deleteConstraint(compositeArray[2].bodies[0], compositeArray[0].bodies[0]);
   deleteConstraint(compositeArray[3].bodies[0], compositeArray[0].bodies[0]);
   // set step size and tooth width
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 2;
   toothWidth = toothWidthDegree / conversionFactor;
   // change bodies to crank motion specific bodies
@@ -195,7 +197,7 @@ function initializeCrank() {
   createUIConstraints(compositeArray[0], beamSpace, 0, 6);
   // set positions of new bodies
   Body.setPosition(compositeArray[0].bodies[0], {
-    x: window.innerWidth * (0.75 * 0.45),
+    x: window.innerWidth * kWindowWidth,
     y:
       window.innerHeight -
       basePoint -
@@ -204,13 +206,13 @@ function initializeCrank() {
       parseInt(pivotValue),
   });
   Body.setPosition(compositeArray[1].bodies[0], {
-    x: window.innerWidth * (0.75 * 0.45),
+    x: window.innerWidth * kWindowWidth,
     y: window.innerHeight - basePoint,
   });
   // set constraint locations of new bodies
-  compositeArray[1].constraints[0].pointA.x = window.innerWidth * (0.75 * 0.45);
+  compositeArray[1].constraints[0].pointA.x = window.innerWidth * kWindowWidth;
   compositeArray[1].constraints[0].pointA.y = window.innerHeight - basePoint;
-  compositeArray[0].constraints[0].pointA.x = window.innerWidth * (0.75 * 0.45);
+  compositeArray[0].constraints[0].pointA.x = window.innerWidth * kWindowWidth;
   compositeArray[0].constraints[0].pointA.y =
     compositeArray[1].constraints[0].pointA.y - 250;
   compositeArray[2].constraints[0].pointA.y =
@@ -287,6 +289,9 @@ function setToAlternatingGear() {
 
 let prevSpaceValue = 50;
 let changeSpaceWidth = 0;
+//rendering consts
+const kLineWidth = 2;
+const kStrokeStyle = "#666";
 // horizontal spacing function
 function beamSpacing(value) {
   if (compositeArray[2] && compositeArray[3]) {
@@ -311,8 +316,8 @@ function beamSpacing(value) {
   }
   // change ui constraint colors and width back to normal
   document.getElementById("horizontalSpaceValue").innerHTML = value;
-  compositeArray[0].constraints[1].render.lineWidth = 2;
-  compositeArray[0].constraints[1].render.strokeStyle = "#666";
+  compositeArray[0].constraints[1].render.lineWidth = kLineWidth;
+  compositeArray[0].constraints[1].render.strokeStyle = kStrokeStyle;
 }
 let prevPivotValue = 100;
 let pivotValue = 100;
@@ -339,8 +344,8 @@ function pivotHeight(value) {
     linkageLength = parseInt(value);
   }
   // set colors back to normal
-  compositeArray[0].constraints[2].render.lineWidth = 2;
-  compositeArray[0].constraints[2].render.strokeStyle = "#666";
+  compositeArray[0].constraints[2].render.lineWidth = kLineWidth;
+  compositeArray[0].constraints[2].render.strokeStyle = kStrokeStyle;
 }
 // linkage position along beam
 let constraintPvalue = 0;
@@ -397,15 +402,15 @@ function circleJointHeight(value) {
       jointComposites[i].constraints[0].bodyB === compositeArray[1].bodies[0]
     ) {
       jointComposites[i].constraints[0].length = 350 + changeHeightValue;
-      jointComposites[i].constraints[0].render.lineWidth = 2;
-      jointComposites[i].constraints[0].render.strokeStyle = "#666";
+      jointComposites[i].constraints[0].render.lineWidth = kLineWidth;
+      jointComposites[i].constraints[0].render.strokeStyle = kStrokeStyle;
     } else if (
       jointComposites[i].constraints[0].bodyA === compositeArray[1].bodies[0] &&
       jointComposites[i].constraints[0].bodyB === compositeArray[0].bodies[0]
     ) {
       jointComposites[i].constraints[0].length = 350 + changeHeightValue;
-      jointComposites[i].constraints[0].render.lineWidth = 2;
-      jointComposites[i].constraints[0].render.strokeStyle = "#666";
+      jointComposites[i].constraints[0].render.lineWidth = kLineWidth;
+      jointComposites[i].constraints[0].render.strokeStyle = kStrokeStyle;
     }
     module.pivot2Point = parseInt(changeHeightValue);
   }
@@ -463,9 +468,10 @@ Events.on(engine, "afterUpdate", function (event) {
   const top = compositeArray[0].bodies[0].position.y - 200 - pivotValue;
   const b = top - bottom;
   const a = compositeArray[2].width;
-  const angleC = Math.acos((a * a + b * b - c * c) / (2 * a * b));
+  const angleC = Math.acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b));
+  const kAngleC = 1.5708;
   if (angleC) {
-    if (angleC - 1.5708 < -1) {
+    if (angleC - kAngleC < -1) {
     } else if (
       compositeArray[2].bodies[0].angularVelocity > 0.1 ||
       compositeArray[2].angularVelocity < -0.1
@@ -473,8 +479,8 @@ Events.on(engine, "afterUpdate", function (event) {
       Body.setAngularVelocity(compositeArray[2].bodies[0], 0);
       Body.setAngularVelocity(compositeArray[3].bodies[0], 0);
     } else {
-      Body.setAngle(compositeArray[2].bodies[0], angleC - 1.5708);
-      Body.setAngle(compositeArray[3].bodies[0], -(angleC - 1.5708));
+      Body.setAngle(compositeArray[2].bodies[0], angleC - kAngleC);
+      Body.setAngle(compositeArray[3].bodies[0], -(angleC - kAngleC));
     }
   }
   Body.setVelocity(compositeArray[2].bodies[0], { x: 0, y: 0 });
@@ -510,7 +516,7 @@ Events.on(engine, "afterUpdate", function (event) {
 
 // add initial bodies when first loads
 addLinGearComposite(
-  window.innerWidth * (0.75 * 0.45),
+  window.innerWidth * kWindowWidth,
   window.innerHeight * 0.8 + rackPinBase
 );
 // set constraint stiffness very low
@@ -519,20 +525,20 @@ compositeArray[0].constraints[0].stiffness = 0.0000001;
 createUIConstraints(compositeArray[0], prevSpaceValue, prevPivotValue, 6);
 // add gear body
 addGearComposite(
-  window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 2),
+  window.innerWidth * kWindowWidth + (radius + toothHeight * 2),
   window.innerHeight * 0.68 + rackPinBase
 );
 // add rectangle bodies
 addRectComposite(
   300,
   5,
-  window.innerWidth * (0.75 * 0.45) - 200,
+  window.innerWidth * kWindowWidth - 200,
   compositeArray[0].constraints[0].pointA.y - rectBase
 );
 addRectComposite(
   -300,
   5,
-  window.innerWidth * (0.75 * 0.45) + 200,
+  window.innerWidth * kWindowWidth + 200,
   compositeArray[0].constraints[0].pointA.y - rectBase
 );
 // set initial width of beams
@@ -544,9 +550,10 @@ newWidth2 = originalWidth2;
 createConstraintFake(compositeArray[0].bodies[0], compositeArray[2].bodies[0]);
 createConstraintFake(compositeArray[0].bodies[0], compositeArray[3].bodies[0]);
 // set motors
+const kMotorSpeed = 0.021;
 compositeArray[1].isMotor = true;
 compositeArray[1].alternate = true;
-compositeArray[1].motorSpeed = 0.021;
+compositeArray[1].motorSpeed = kMotorSpeed;
 module.motorSpeed = compositeArray[1].motorSpeed * 1000;
 pivotHeight(0);
 // Engine.run(engine);
@@ -557,4 +564,4 @@ const x1 = compositeArray[0].constraints[0].pointA.x;
 const x2 = compositeArray[2].constraints[0].pointA.x + 300;
 const y1 = compositeArray[0].constraints[0].pointA.y - 300;
 const y2 = compositeArray[2].constraints[0].pointA.y;
-const d = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+const d = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
