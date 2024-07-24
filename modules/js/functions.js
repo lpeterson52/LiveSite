@@ -1080,14 +1080,13 @@ function createConstraintFake2(
         if (startShape === "linGear" || startShape === "linRect") {
           if (compositeArray[i].width > 0) {
             if (i > 3) {
-              startOffset =
-                -module.horizontalSpace + module.horizontalSpace * 2;
+              startOffset = module.horizontalSpace;
             } else {
               startOffset = -module.horizontalSpace;
             }
           } else {
             if (i > 3) {
-              startOffset = module.horizontalSpace - module.horizontalSpace * 2;
+              startOffset = -module.horizontalSpace;
             } else {
               startOffset = module.horizontalSpace;
             }
