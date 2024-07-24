@@ -314,9 +314,9 @@ Events.on(engine, "afterUpdate", function (event) {
     const b = top - bottom;
     const a = compositeArray[2].width;
     const angleC = Math.acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b));
-    const angleCConst = 1.5708; 
+    const kAngleC = 1.5708; 
     if (angleC) {
-      if (angleC - angleCConst < -1) {
+      if (angleC - kAngleC < -1) {
       } else if (
         compositeArray[2].bodies[0].angularVelocity > 0.1 ||
         compositeArray[2].angularVelocity < -0.1
@@ -324,8 +324,8 @@ Events.on(engine, "afterUpdate", function (event) {
         Body.setAngularVelocity(compositeArray[2].bodies[0], 0);
         Body.setAngularVelocity(compositeArray[3].bodies[0], 0);
       } else {
-        Body.setAngle(compositeArray[2].bodies[0], angleC - angleCConst);
-        Body.setAngle(compositeArray[3].bodies[0], -(angleC - angleCConst));
+        Body.setAngle(compositeArray[2].bodies[0], angleC - kAngleC);
+        Body.setAngle(compositeArray[3].bodies[0], -(angleC - kAngleC));
       }
     }
     Body.setVelocity(compositeArray[2].bodies[0], { x: 0, y: 0 });

@@ -222,12 +222,12 @@ Events.on(engine, "afterUpdate", function (event) {
     const top = compositeArray[0].bodies[0].position.y - 200 - pivotValue;
     const b = top - bottom;
     const a = compositeArray[2].width;
-    const angleC = Math.acos((a * a + b * b - c * c) / (2 * a * b));
+    const angleC = Math.acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b));
     // update beam rotation angle
     if (angleC) {
-      const angleCConst = 1.5708;
-      Body.setAngle(compositeArray[2].bodies[0], angleC - angleCConst);
-      Body.setAngle(compositeArray[3].bodies[0], -(angleC - angleCConst));
+      const kAngleC = 1.5708;
+      Body.setAngle(compositeArray[2].bodies[0], angleC - kAngleC);
+      Body.setAngle(compositeArray[3].bodies[0], -(angleC - kAngleC));
     }
     // prevent any movement on x and y axis
     Body.setVelocity(compositeArray[2].bodies[0], { x: 0, y: 0 });
