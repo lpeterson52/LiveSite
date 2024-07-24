@@ -15,7 +15,7 @@ var boundsScaleTarget = 1,
 };
 
 
-if (rackPinionModule == true){
+if (rackPinionModule === true){
   scale = scale -0.2
 }
 

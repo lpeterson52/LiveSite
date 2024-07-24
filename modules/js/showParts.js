@@ -32,60 +32,60 @@ function showParts(){
   // loop through all composites and classify the objects that exist
   for(var i = 0; i<compositeArray.length; i++){
     // if shape is continuous then draw continuous gear unless it is in rotate, spur, or planetary module
-    if(compositeArray[i].shape == "gear"){
-      if(compositeArray[i].alternate == false){
+    if(compositeArray[i].shape === "gear"){
+      if(compositeArray[i].alternate === false){
         continuous = 1;
         if(rotateModule || spurModule || planetaryModule){
           continuous = 0;
         }
       }
       // if radius is 80 add value to numLargeGear
-      if(compositeArray[i].radius == 80){
+      if(compositeArray[i].radius === 80){
         numLargeGear ++
       }
       // if 64 add value to numMediumGear
-      else if(compositeArray[i].radius == 64){
+      else if(compositeArray[i].radius === 64){
         numMediumGear++
       }
       // if 48 add value to numSmallGear
-      else if(compositeArray[i].radius == 48){
+      else if(compositeArray[i].radius === 48){
         numSmallGear++
       }
     }
     // if cam draw specific cam shape
-    if(compositeArray[i].shape == "cam" || compositeArray[i].shape == "shell"){
-      if(compositeArray[i].shape == "shell"){
+    if(compositeArray[i].shape === "cam" || compositeArray[i].shape === "shell"){
+      if(compositeArray[i].shape === "shell"){
         camType = 1
       }
-      if(compositeArray[i].shape == "cam"){
+      if(compositeArray[i].shape === "cam"){
         camType = 0
       }
-      if(compositeArray[i].radius == 80){
+      if(compositeArray[i].radius === 80){
         numLargeCam++
       }
-      else if(compositeArray[i].radius == 64){
+      else if(compositeArray[i].radius === 64){
         numMediumCam++
       }
-      else if(compositeArray[i].radius == 48){
+      else if(compositeArray[i].radius === 48){
         numSmallCam++
       }
     }
     // if crank module then add value to large medium or small crank
-    if(compositeArray[i].shape == "circleCrank"){
+    if(compositeArray[i].shape === "circleCrank"){
       crankLength = 350 + parseInt(module.pivot2Point)
-      if(compositeArray[i].radius == 132){ 
+      if(compositeArray[i].radius === 132){ 
         numLargeCrank++
       }
-      else if(compositeArray[i].radius ==116){
+      else if(compositeArray[i].radius ===116){
         numMediumCrank++
       }
-      else if(compositeArray[i].radius == 100){
+      else if(compositeArray[i].radius === 100){
         numSmallCrank++
       }
     }
     // track if there is mirroring or not
-    if(compositeArray[i].shape == "linGear"){
-      if(mirrored == true){
+    if(compositeArray[i].shape === "linGear"){
+      if(mirrored === true){
         mirror = 1
       }
       numLinearGear++
@@ -104,7 +104,7 @@ function showParts(){
   // if spur or rotate module track properties of specific gears
   if(spurModule || rotateModule){
     if(compositeArray[2]){
-      if(compositeArray[2].shape == "gear"){
+      if(compositeArray[2].shape === "gear"){
         spurRotate = 1
         rotateGear = compositeArray[2].radius;
         spur1Radius = compositeArray[0].radius

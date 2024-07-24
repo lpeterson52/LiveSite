@@ -15,10 +15,10 @@ function changeBodyRotate(index) {
   }
   Composite.remove(compositeArray[index], compositeArray[index].bodies[0]);
   let tmpConstraintXPoint;
-  if (index == 0) {
+  if (index === 0) {
     tmpConstraintXPoint =
       window.innerWidth * (0.75 * 0.45) - (radius + toothHeight * 0.6);
-  } else if (index == 1) {
+  } else if (index === 1) {
     tmpConstraintXPoint =
       window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6);
     compositeArray[2].constraints[0].pointA.x =
@@ -39,7 +39,7 @@ function changeBodyRotate(index) {
     compositeArray[index],
     Bodies.fromVertices(tmpConstraintXPoint, tmpConstraintYPoint, [verts2])
   );
-  if (compositeArray[index].shape == "gear") {
+  if (compositeArray[index].shape === "gear") {
     Composite.add(
       compositeArray[index],
       Bodies.circle(tmpConstraintXPoint, tmpConstraintYPoint, 1)
@@ -65,7 +65,7 @@ function changeBodyFlap(index) {
   }
   Composite.remove(compositeArray[index], compositeArray[index].bodies[0]);
   let tmpConstraintXPoint;
-  if (index == 0) {
+  if (index === 0) {
     tmpConstraintXPoint =
       window.innerWidth * (0.75 * 0.5) - (radius + toothHeight * 0.6);
   } else {
@@ -80,7 +80,7 @@ function changeBodyFlap(index) {
     compositeArray[index],
     Bodies.fromVertices(tmpConstraintXPoint, tmpConstraintYPoint, [verts2])
   );
-  if (compositeArray[index].shape == "gear") {
+  if (compositeArray[index].shape === "gear") {
     Composite.add(
       compositeArray[index],
       Bodies.circle(tmpConstraintXPoint, tmpConstraintYPoint, 1)
@@ -196,7 +196,7 @@ function motorR() {
 // change module when dropdown changes
 function changeMotion() {
   const string = document.getElementById("changeMotion").value;
-  if (string == "flapping") {
+  if (string === "flapping") {
     // set new module indicators
     rotateMode = false;
     flapMode = true;
@@ -245,7 +245,7 @@ function changeMotion() {
     compositeArray[0].motorDir = -1;
     compositeArray[1].motorDir = 1;
     flapBeamSpaceUpdate();
-  } else if (string == "rotate") {
+  } else if (string === "rotate") {
     // set module indicators
     flapMode = false;
     rotateMode = true;

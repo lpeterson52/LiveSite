@@ -38,15 +38,15 @@ function gear(rad) {
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   // if cam motion then change body with specific function
-  if (camMod == true) {
-    if (compositeArray[1].shape == "cam") {
+  if (camMod === true) {
+    if (compositeArray[1].shape === "cam") {
       changeBody2(1);
-    } else if (compositeArray[1].shape == "shell") {
+    } else if (compositeArray[1].shape === "shell") {
       changeShell();
     }
   }
   // if continuous rack and pinion then change body to continuous
-  else if (rackPinionMod == true && compositeArray[1].alternate == false) {
+  else if (rackPinionMod === true && compositeArray[1].alternate === false) {
     changeBodyContinuous(1);
   }
   // if crank motion change body with specific function
@@ -66,7 +66,7 @@ function gear(rad) {
   else {
     changeBody(1);
   }
-  if (rackPinionMod == true) {
+  if (rackPinionMod === true) {
     compositeArray[1].constraints[0].pointA.x =
       window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8);
   }
@@ -234,19 +234,19 @@ function crank() {
 // switch mechanism when dropdown changes/ change submodules and then call the specific default module function to generate the parts
 function changeMech() {
   const string = document.getElementById("changeMech").value;
-  if (string == "rack-pinion") {
+  if (string === "rack-pinion") {
     rackPinionMod = true;
     camMod = false;
     crankMod = false;
     rackPinion();
     compositeArray[0].constraints[0].stiffness = 0.001;
-  } else if (string == "cam") {
+  } else if (string === "cam") {
     camMod = true;
     crankMod = false;
     rackPinionMod = false;
     cam();
     compositeArray[0].constraints[0].stiffness = 0.01;
-  } else if (string == "crank") {
+  } else if (string === "crank") {
     crankMod = true;
     camMod = false;
     rackPinionMod = false;
@@ -393,15 +393,15 @@ function circleJointHeight(value) {
   // change constraint positions for joints in crank mechanism
   for (let i = 0; i < jointComposites.length; i++) {
     if (
-      jointComposites[i].constraints[0].bodyA == compositeArray[0].bodies[0] &&
-      jointComposites[i].constraints[0].bodyB == compositeArray[1].bodies[0]
+      jointComposites[i].constraints[0].bodyA === compositeArray[0].bodies[0] &&
+      jointComposites[i].constraints[0].bodyB === compositeArray[1].bodies[0]
     ) {
       jointComposites[i].constraints[0].length = 350 + changeHeightValue;
       jointComposites[i].constraints[0].render.lineWidth = 2;
       jointComposites[i].constraints[0].render.strokeStyle = "#666";
     } else if (
-      jointComposites[i].constraints[0].bodyA == compositeArray[1].bodies[0] &&
-      jointComposites[i].constraints[0].bodyB == compositeArray[0].bodies[0]
+      jointComposites[i].constraints[0].bodyA === compositeArray[1].bodies[0] &&
+      jointComposites[i].constraints[0].bodyB === compositeArray[0].bodies[0]
     ) {
       jointComposites[i].constraints[0].length = 350 + changeHeightValue;
       jointComposites[i].constraints[0].render.lineWidth = 2;
@@ -427,7 +427,7 @@ function resetRadius() {
 }
 // change radius for crank mechanism +52
 function crankRadius() {
-  if (radius == 80 || radius == 64 || radius == 48) {
+  if (radius === 80 || radius === 64 || radius === 48) {
     radius = radius + 52;
   }
 }
@@ -479,7 +479,7 @@ Events.on(engine, "afterUpdate", function (event) {
   }
   Body.setVelocity(compositeArray[2].bodies[0], { x: 0, y: 0 });
   Body.setVelocity(compositeArray[3].bodies[0], { x: 0, y: 0 });
-  if (compositeArray[1].alternate == false && rackPinionMod == true) {
+  if (compositeArray[1].alternate === false && rackPinionMod === true) {
     if (compositeArray[1].bodies[0].angle >= 2 * Math.PI) {
       Body.setAngle(compositeArray[1].bodies[0], 0);
     }

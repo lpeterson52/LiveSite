@@ -1,5 +1,5 @@
 function updateUI(){
-  if(radius == 80 || radius == 132){
+  if(radius === 80 || radius === 132){
     $('#setLargeGear').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGear').css("background-image", "none") 
     $('#setSmallGear').css("background-image", "none") 
@@ -7,7 +7,7 @@ function updateUI(){
     $('#setMedGear').css("color", "#000") 
     $('#setSmallGear').css("color", "#000") 
   }
-  else if(radius == 64 || radius == 116){
+  else if(radius === 64 || radius === 116){
     $('#setMedGear').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setLargeGear').css("background-image", "none") 
     $('#setSmallGear').css("background-image", "none") 
@@ -15,7 +15,7 @@ function updateUI(){
     $('#setMedGear').css("color", "#fff") 
     $('#setSmallGear').css("color", "#000") 
   }
-  else if(radius == 48 || radius == 100){
+  else if(radius === 48 || radius === 100){
     $('#setSmallGear').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGear').css("background-image", "none") 
     $('#setLargeGear').css("background-image", "none") 
@@ -25,7 +25,7 @@ function updateUI(){
   }
 }
 function updateFlapUI(){
-  if(compositeArray[0].radius == 80){
+  if(compositeArray[0].radius === 80){
     $('#setLargeGearL').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGearL').css("background-image", "none") 
     $('#setSmallGearL').css("background-image", "none") 
@@ -33,7 +33,7 @@ function updateFlapUI(){
     $('#setMedGearL').css("color", "#000") 
     $('#setSmallGearL').css("color", "#000") 
   }
-  else if(compositeArray[0].radius == 64){
+  else if(compositeArray[0].radius === 64){
     $('#setMedGearL').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setLargeGearL').css("background-image", "none") 
     $('#setSmallGearL').css("background-image", "none") 
@@ -41,7 +41,7 @@ function updateFlapUI(){
     $('#setMedGearL').css("color", "#fff") 
     $('#setSmallGearL').css("color", "#000") 
   }
-  else if(compositeArray[0].radius == 48){
+  else if(compositeArray[0].radius === 48){
     $('#setSmallGearL').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGearL').css("background-image", "none") 
     $('#setLargeGearL').css("background-image", "none") 
@@ -49,7 +49,7 @@ function updateFlapUI(){
     $('#setMedGearL').css("color", "#000") 
     $('#setSmallGearL').css("color", "#fff") 
   }
-  if(compositeArray[1].radius == 80){
+  if(compositeArray[1].radius === 80){
     $('#setLargeGearR').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGearR').css("background-image", "none") 
     $('#setSmallGearR').css("background-image", "none") 
@@ -57,7 +57,7 @@ function updateFlapUI(){
     $('#setMedGearR').css("color", "#000") 
     $('#setSmallGearR').css("color", "#000") 
   }
-  else if(compositeArray[1].radius == 64){
+  else if(compositeArray[1].radius === 64){
     $('#setMedGearR').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setLargeGearR').css("background-image", "none") 
     $('#setSmallGearR').css("background-image", "none") 
@@ -65,7 +65,7 @@ function updateFlapUI(){
     $('#setMedGearR').css("color", "#fff") 
     $('#setSmallGearR').css("color", "#000") 
   }
-  else if(compositeArray[1].radius == 48){
+  else if(compositeArray[1].radius === 48){
     $('#setSmallGearR').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGearR').css("background-image", "none") 
     $('#setLargeGearR').css("background-image", "none") 
@@ -118,7 +118,7 @@ function updateRotateUI(){
   if(compositeArray[0] && compositeArray[1] && compositeArray[2]){
     $('.planetary').hide()
     $('.spur').show()
-    if(compositeArray[0].radius == 80){
+    if(compositeArray[0].radius === 80){
       $('#setLargeGear1').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#setMedGear1').css("background-image", "none") 
       $('#setSmallGear1').css("background-image", "none") 
@@ -126,7 +126,7 @@ function updateRotateUI(){
       $('#setMedGear1').css("color", "#000") 
       $('#setSmallGear1').css("color", "#000") 
     }
-    else if(compositeArray[0].radius == 64){
+    else if(compositeArray[0].radius === 64){
       $('#setMedGear1').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#setLargeGear1').css("background-image", "none") 
       $('#setSmallGear1').css("background-image", "none") 
@@ -134,7 +134,7 @@ function updateRotateUI(){
       $('#setMedGear1').css("color", "#fff") 
       $('#setSmallGear1').css("color", "#000") 
     }
-    else if(compositeArray[0].radius == 48){
+    else if(compositeArray[0].radius === 48){
       $('#setSmallGear1').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#setMedGear1').css("background-image", "none") 
       $('#setLargeGear1').css("background-image", "none") 
@@ -142,7 +142,7 @@ function updateRotateUI(){
       $('#setMedGear1').css("color", "#000") 
       $('#setSmallGear1').css("color", "#fff") 
     }
-    if(compositeArray[1].radius == 80){
+    if(compositeArray[1].radius === 80){
       $('#setLargeGear2').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#setMedGear2').css("background-image", "none") 
       $('#setSmallGear2').css("background-image", "none") 
@@ -150,7 +150,7 @@ function updateRotateUI(){
       $('#setMedGear2').css("color", "#000") 
       $('#setSmallGear2').css("color", "#000") 
     }
-    else if(compositeArray[1].radius == 64){
+    else if(compositeArray[1].radius === 64){
       $('#setMedGear2').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#setLargeGear2').css("background-image", "none") 
       $('#setSmallGear2').css("background-image", "none") 
@@ -158,7 +158,7 @@ function updateRotateUI(){
       $('#setMedGear2').css("color", "#fff") 
       $('#setSmallGear2').css("color", "#000") 
     }
-    else if(compositeArray[1].radius == 48){
+    else if(compositeArray[1].radius === 48){
       $('#setSmallGear2').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#setMedGear2').css("background-image", "none") 
       $('#setLargeGear2').css("background-image", "none") 
@@ -166,7 +166,7 @@ function updateRotateUI(){
       $('#setMedGear2').css("color", "#000") 
       $('#setSmallGear2').css("color", "#fff") 
     }
-    if(compositeArray[2].radius == 80){
+    if(compositeArray[2].radius === 80){
       $('#setLargeGear3').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#setMedGear3').css("background-image", "none") 
       $('#setSmallGear3').css("background-image", "none") 
@@ -174,7 +174,7 @@ function updateRotateUI(){
       $('#setMedGear3').css("color", "#000") 
       $('#setSmallGear3').css("color", "#000") 
     }
-    else if(compositeArray[2].radius == 64){
+    else if(compositeArray[2].radius === 64){
       $('#setMedGear3').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#setLargeGear3').css("background-image", "none") 
       $('#setSmallGear3').css("background-image", "none") 
@@ -182,7 +182,7 @@ function updateRotateUI(){
       $('#setMedGear3').css("color", "#fff") 
       $('#setSmallGear3').css("color", "#000") 
     }
-    else if(compositeArray[2].radius == 48){
+    else if(compositeArray[2].radius === 48){
       $('#setSmallGear3').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#setMedGear3').css("background-image", "none") 
       $('#setLargeGear3').css("background-image", "none") 
@@ -210,7 +210,7 @@ function updateRotateUI(){
   }
 }
 function updatePlanetaryUI(){
-  if(compositeArray[1].radius == 80){
+  if(compositeArray[1].radius === 80){
     $('#setLargeGear1P').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGear1P').css("background-image", "none") 
     $('#setSmallGear1P').css("background-image", "none") 
@@ -219,7 +219,7 @@ function updatePlanetaryUI(){
     $('#setSmallGear1P').css("color", "#000") 
     // console.log(compositeArray[1].radius)
   }
-  else if(compositeArray[1].radius == 64){
+  else if(compositeArray[1].radius === 64){
     $('#setMedGear1P').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setLargeGear1P').css("background-image", "none") 
     $('#setSmallGear1P').css("background-image", "none") 
@@ -227,7 +227,7 @@ function updatePlanetaryUI(){
     $('#setMedGear1P').css("color", "#fff") 
     $('#setSmallGear1P').css("color", "#000") 
   }
-  else if(compositeArray[1].radius == 48){
+  else if(compositeArray[1].radius === 48){
     $('#setSmallGear1P').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGear1P').css("background-image", "none") 
     $('#setLargeGear1P').css("background-image", "none") 
@@ -235,7 +235,7 @@ function updatePlanetaryUI(){
     $('#setMedGear1P').css("color", "#000") 
     $('#setSmallGear1P').css("color", "#fff") 
   }
-  if(compositeArray[0].radius == 80){
+  if(compositeArray[0].radius === 80){
     $('#setLargeGear2P').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGear2P').css("background-image", "none") 
     $('#setSmallGear2P').css("background-image", "none") 
@@ -243,7 +243,7 @@ function updatePlanetaryUI(){
     $('#setMedGear2P').css("color", "#000") 
     $('#setSmallGear2P').css("color", "#000") 
   }
-  else if(compositeArray[0].radius == 64){
+  else if(compositeArray[0].radius === 64){
     $('#setMedGear2P').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setLargeGear2P').css("background-image", "none") 
     $('#setSmallGear2P').css("background-image", "none") 
@@ -251,7 +251,7 @@ function updatePlanetaryUI(){
     $('#setMedGear2P').css("color", "#fff") 
     $('#setSmallGear2P').css("color", "#000") 
   }
-  else if(compositeArray[0].radius == 48){
+  else if(compositeArray[0].radius === 48){
     $('#setSmallGear2P').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
     $('#setMedGear2P').css("background-image", "none") 
     $('#setLargeGear2P').css("background-image", "none") 
@@ -306,7 +306,7 @@ function buttonDisable(){
     document.getElementById("continuous").disabled = false;
     document.getElementById("alternate").disabled = false;
   }
-  if(compositeArray[1].alternate == false){
+  if(compositeArray[1].alternate === false){
     document.getElementById("mirror").disabled = true;
   }
   else{
@@ -314,12 +314,12 @@ function buttonDisable(){
   }
 }
 function shellCam(){
-  if(compositeArray[1].shape == "shell" || compositeArray[1].shape == "cam"){
+  if(compositeArray[1].shape === "shell" || compositeArray[1].shape === "cam"){
     $('.cam-type').show()
     if(document.getElementById("alternate")){
        document.getElementById("alternate").disabled = true;
     }
-    if(compositeArray[1].shape == "shell"){
+    if(compositeArray[1].shape === "shell"){
       $('#shellShape').css("background-image", "linear-gradient(to bottom,#337ab7 0,#265a88 100%)") 
       $('#eggShape').css("background-image", "none") 
       $('#eggShape').css("color", "#000")

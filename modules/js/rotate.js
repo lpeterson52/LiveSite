@@ -12,10 +12,10 @@ function changeBodyRotate(index) {
     Composite.remove(compositeArray[index], compositeArray[index].bodies[0]);
     // store constraint position values
     let tmpConstraintXPoint;
-    if (index == 0) {
+    if (index === 0) {
       tmpConstraintXPoint =
         window.innerWidth * (0.75 * 0.45) - (radius + toothHeight * 0.6);
-    } else if (index == 1) {
+    } else if (index === 1) {
       tmpConstraintXPoint =
         window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6);
       compositeArray[2].constraints[0].pointA.x =
@@ -44,7 +44,7 @@ function changeBodyRotate(index) {
       Bodies.fromVertices(tmpConstraintXPoint, tmpConstraintYPoint, [verts2])
     );
     // add ui motor body for sprite
-    if (compositeArray[index].shape == "gear") {
+    if (compositeArray[index].shape === "gear") {
       Composite.add(
         compositeArray[index],
         Bodies.circle(tmpConstraintXPoint, tmpConstraintYPoint, 1)
@@ -83,7 +83,7 @@ function changeBodyPlanetary(index) {
       compositeArray[index],
       Bodies.fromVertices(tmpConstraintXPoint, tmpConstraintYPoint, [verts2])
     );
-    if (compositeArray[index].shape == "gear") {
+    if (compositeArray[index].shape === "gear") {
       Composite.add(
         compositeArray[index],
         Bodies.circle(tmpConstraintXPoint, tmpConstraintYPoint, 1)
@@ -130,11 +130,11 @@ function changeBodyPlanetary(index) {
 }
 // create new composite with gear and constraints
 function addPlanetaryGearComposite(centerX, centerY, constraintX, constraintY) {
-  if (radius == 80) {
+  if (radius === 80) {
     toothWidthDegree = 2;
-  } else if (radius == 64) {
+  } else if (radius === 64) {
     toothWidthDegree = 3;
-  } else if (radius == 48) {
+  } else if (radius === 48) {
     toothWidthDegree = 4;
   }
   toothWidth = toothWidthDegree / conversionFactor;
@@ -293,7 +293,7 @@ function motorR() {
 // switch mechanism when dropdown changes
 function changeMech() {
   const string = document.getElementById("changeMech").value;
-  if (string == "spur") {
+  if (string === "spur") {
     // change submodule indicator
     planetaryMod = false;
     spurMod = true;
@@ -339,7 +339,7 @@ function changeMech() {
     compositeArray[0].motorSpeed = 0.051;
     compositeArray[0].motorDir = -1;
     compositeArray[1].motorDir = 1;
-  } else if (string == "planetary") {
+  } else if (string === "planetary") {
     // set submodule indicators
     spurMod = false;
     planetaryMod = true;

@@ -4,8 +4,6 @@ let c = 369; //connector length
 const rectBase = 600;
 let originalWidth1;
 let originalWidth2;
-var newWidth1;
-var newWidth2;
 module.verticalSpace = 0;
 // generate small gear
 ///////////////////////////GEAR SIZE///////////////////////////////////
@@ -22,15 +20,15 @@ function gear(rad) {
   steps = 0.25 * radius * 2;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
-  if (compositeArray[1].alternate == false) {
+  if (compositeArray[1].alternate === false) {
     changeBodyContinuous(1);
   } else {
     changeBody(1);
   }
   compositeArray[1].constraints[0].pointA.x =
     window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8);
-  if (shared == true) {
-    if (flipY == true) {
+  if (shared === true) {
+    if (flipY === true) {
       compositeArray[compositeArray.length - 3].constraints[0].pointA.x =
         window.innerWidth * (0.75 * 0.45) + radius * 2 + toothHeight * 2 + 25;
     } else {
@@ -38,8 +36,8 @@ function gear(rad) {
         window.innerWidth * (0.75 * 0.45) + radius * 2 + toothHeight * 2 + 25;
     }
   }
-  if (paired == true) {
-    if (flipY == true) {
+  if (paired === true) {
+    if (flipY === true) {
       changeBody(compositeArray.length - 4);
       compositeArray[1].constraints[0].pointA.x =
         window.innerWidth * (0.75 * 0.5) - (radius + toothHeight / 2);
@@ -91,7 +89,7 @@ function gear(rad) {
 // change simulation when dropdown changes
 function changeMotion() {
   const string = document.getElementById("changeMotion").value;
-  if (string == "upDown") {
+  if (string === "upDown") {
     // reset and remove all constraints
     reset();
     removeUIConstraints(compositeArray[0]);
@@ -124,7 +122,7 @@ function changeMotion() {
       y: window.innerHeight * 0.5 + 130,
     });
     compositeArray[0].constraints[0].stiffness = 0.001;
-  } else if (string == "openClose") {
+  } else if (string === "openClose") {
     // reset everything
     reset();
     // create constraints between ui components
@@ -186,7 +184,7 @@ function mirrorModal() {
   flipLabel = document.getElementById("flipYLabel");
   flipCheck = document.getElementById("flipYCheck");
   flipTitle = document.getElementById("flipYTitle");
-  if (mirrored == false) {
+  if (mirrored === false) {
     overlay3();
     if (openCloseMod != true) {
       flipCheck.style.visibility = "hidden";
@@ -440,7 +438,7 @@ function reset() {
   modified = false;
   alternatingGear();
 
-  if (openCloseMod == true) {
+  if (openCloseMod === true) {
     beamSpacing(50);
     // remove ui parts
     removeUIConstraints(compositeArray[0]);
@@ -559,7 +557,7 @@ function alternatingGear() {
 // horizontal spacing
 let prevSpaceValue = 50;
 let changeSpaceWidth = 0;
-var beamSpace = 50;
+beamSpace = 50;
 let modified = false;
 function beamSpacing(value) {
   changeSpaceWidth = value - prevSpaceValue;
@@ -576,7 +574,7 @@ function beamSpacing(value) {
         jointComposites[jointComposites.length - 4].constraints[0].pointA.x =
           jointComposites[jointComposites.length - 4].constraints[0].pointA.x -
           changeSpaceWidth;
-        if (compositeArray[2].width == 300 && modified == false) {
+        if (compositeArray[2].width === 300 && modified === false) {
           jointComposites[jointComposites.length - 1].constraints[0].pointA.x =
             jointComposites[jointComposites.length - 1].constraints[0].pointA
               .x - changeSpaceWidth;
@@ -775,7 +773,7 @@ Events.on(engine, "beforeUpdate", function (event) {});
 // same as above
 // calculate angle to rotate open close beams
 Events.on(engine, "afterUpdate", function (event) {
-  if (openCloseMod == true) {
+  if (openCloseMod === true) {
     const bottom = compositeArray[0].constraints[0].pointA.y - 600;
     const top = compositeArray[0].bodies[0].position.y - 200 - pivotValue;
     const b = top - bottom;
@@ -843,9 +841,9 @@ Events.on(engine, "afterUpdate", function (event) {
       }
     }
   }
-  if (paired == true) {
+  if (paired === true) {
     for (let i = 2; i < compositeArray.length; i++) {
-      if (compositeArray[i].shape == "linGear") {
+      if (compositeArray[i].shape === "linGear") {
         Body.setPosition(compositeArray[i].bodies[0], {
           x: compositeArray[i].constraints[0].pointA.x,
           y: compositeArray[0].bodies[0].position.y,
@@ -853,9 +851,9 @@ Events.on(engine, "afterUpdate", function (event) {
       }
     }
   }
-  if (shared == true) {
+  if (shared === true) {
     for (let i = 2; i < compositeArray.length; i++) {
-      if (compositeArray[i].shape == "linGear") {
+      if (compositeArray[i].shape === "linGear") {
         const difference =
           compositeArray[0].bodies[0].position.y -
           compositeArray[0].constraints[0].pointA.y;
@@ -866,7 +864,7 @@ Events.on(engine, "afterUpdate", function (event) {
       }
     }
   }
-  if (compositeArray[1].alternate == false) {
+  if (compositeArray[1].alternate === false) {
     if (compositeArray[1].bodies[0].angle >= 2 * Math.PI) {
       Body.setAngle(compositeArray[1].bodies[0], 0);
     }

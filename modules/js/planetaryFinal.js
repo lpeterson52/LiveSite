@@ -11,7 +11,7 @@ function changeBodyPlanetary(index) {
   Composite.remove(compositeArray[index], compositeArray[index].bodies[0]);
   // store x and y constraint values
   let tmpConstraintXPoint;
-  if (index == 0) {
+  if (index === 0) {
     tmpConstraintXPoint = compositeArray[0].constraints[0].pointA.x;
   } else {
     tmpConstraintXPoint = compositeArray[0].constraints[0].pointA.x;
@@ -29,7 +29,7 @@ function changeBodyPlanetary(index) {
     Bodies.fromVertices(tmpConstraintXPoint, tmpConstraintYPoint, [verts2])
   );
   // add ui body
-  if (compositeArray[index].shape == "gear") {
+  if (compositeArray[index].shape === "gear") {
     Composite.add(
       compositeArray[index],
       Bodies.circle(tmpConstraintXPoint, tmpConstraintYPoint, 1)

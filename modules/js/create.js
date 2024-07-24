@@ -1,7 +1,7 @@
 // changes href, img, and visibility of different module squares in create.php file
 function changeMods(){
             // check value of dropdown
-            if(document.getElementById("dropdown").value == "mechanism"){
+            if(document.getElementById("dropdown").value === "mechanism"){
                 document.getElementById('one').innerHTML = "Rack & Pinion";
                 document.getElementById('one-href').href = "rackandpinion.php";
                 document.getElementById('one-img').src = "img/RackPinion2.gif";

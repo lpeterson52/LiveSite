@@ -25,9 +25,9 @@ function gear(rad) {
   steps = 0.25 * radius * 2;
   toothWidthDegree = 2;
   toothWidth = toothWidthDegree / conversionFactor;
-  if (compositeArray[1].shape == "cam") {
+  if (compositeArray[1].shape === "cam") {
     changeBody2(1);
-  } else if (compositeArray[1].shape == "shell") {
+  } else if (compositeArray[1].shape === "shell") {
     changeShell();
   }
 }
@@ -65,7 +65,7 @@ function cam() {
 //function that would trigger when you change the motion dropdown
 function changeMotion() {
   const string = document.getElementById("changeMotion").value;
-  if (string == "upDown") {
+  if (string === "upDown") {
     pivotValue = 0;
     prevSpaceValue = 50;
     prevPivotValue = 100;
@@ -81,7 +81,7 @@ function changeMotion() {
     // remove unnecessary shapes if they exist
     removeComposite(compositeArray[3].bodies[0]);
     removeComposite(compositeArray[2].bodies[0]);
-  } else if (string == "openClose") {
+  } else if (string === "openClose") {
     pivotValue = 0;
     prevSpaceValue = 50;
     prevPivotValue = 0;
@@ -122,7 +122,7 @@ function changeMotion() {
 let prevSpaceValue = 50;
 let changeSpaceWidth = 0;
 var spaceValue = 50;
-var beamSpace = 50;
+beamSpace = 50;
 // horizontal spacing function
 function beamSpacing(value) {
   changeSpaceWidth = value - prevSpaceValue;
