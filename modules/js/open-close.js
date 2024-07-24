@@ -396,21 +396,21 @@ function circleJointHeight(value) {
   // reset angle
   Body.setAngle(compositeArray[1].bodies[0], 0);
   // change constraint positions for joints in crank mechanism
-  for (let i = 0; i < jointComposites.length; i++) {
+  for (joint of jointComposites) {
     if (
-      jointComposites[i].constraints[0].bodyA === compositeArray[0].bodies[0] &&
-      jointComposites[i].constraints[0].bodyB === compositeArray[1].bodies[0]
+      joint.constraints[0].bodyA === compositeArray[0].bodies[0] &&
+      joint.constraints[0].bodyB === compositeArray[1].bodies[0]
     ) {
-      jointComposites[i].constraints[0].length = 350 + changeHeightValue;
-      jointComposites[i].constraints[0].render.lineWidth = kLineWidth;
-      jointComposites[i].constraints[0].render.strokeStyle = kStrokeStyle;
+      joint.constraints[0].length = 350 + changeHeightValue;
+      joint.constraints[0].render.lineWidth = kLineWidth;
+      joint.constraints[0].render.strokeStyle = kStrokeStyle;
     } else if (
-      jointComposites[i].constraints[0].bodyA === compositeArray[1].bodies[0] &&
-      jointComposites[i].constraints[0].bodyB === compositeArray[0].bodies[0]
-    ) {
-      jointComposites[i].constraints[0].length = 350 + changeHeightValue;
-      jointComposites[i].constraints[0].render.lineWidth = kLineWidth;
-      jointComposites[i].constraints[0].render.strokeStyle = kStrokeStyle;
+      joint.constraints[0].bodyA === compositeArray[1].bodies[0] &&
+      joint.constraints[0].bodyB === compositeArray[0].bodies[0]
+    ) { 
+      joint.constraints[0].length = 350 + changeHeightValue;
+      joint.constraints[0].render.lineWidth = kLineWidth;
+      joint.constraints[0].render.strokeStyle = kStrokeStyle;
     }
     module.pivot2Point = parseInt(changeHeightValue);
   }
