@@ -7,7 +7,7 @@ let originalWidth2;
 module.verticalSpace = 0;
 // generate small gear
 ///////////////////////////GEAR SIZE///////////////////////////////////
-function changeGear(rad) {
+function gear(rad) {
   angleFactor = 0.21;
   deleteConstraint(compositeArray[1].bodies[0], compositeArray[0].bodies[0]);
   Body.setPosition(compositeArray[0].bodies[0], {
@@ -91,7 +91,7 @@ function changeMotion() {
   const string = document.getElementById("changeMotion").value;
   if (string === "upDown") {
     // reset and remove all constraints
-    resetObjects();
+    reset();
     removeUIConstraints(compositeArray[0]);
     deleteConstraint(compositeArray[3].bodies[0], compositeArray[0].bodies[0]);
     deleteConstraint(compositeArray[2].bodies[0], compositeArray[0].bodies[0]);
@@ -124,7 +124,7 @@ function changeMotion() {
     compositeArray[0].constraints[0].stiffness = 0.001;
   } else if (string === "openClose") {
     // reset everything
-    resetObjects();
+    reset();
     // create constraints between ui components
     createUIConstraints(compositeArray[0], prevSpaceValue, prevPivotValue, 6);
     for (let i = compositeArray.length - 1; i > 1; i--) {
@@ -425,7 +425,7 @@ function mirror() {
   overlay3();
 }
 // reset all objects in simulation
-function resetObjects() {
+function reset() {
   // reset variables
   prevSpaceValue = 50;
   module.horizontalSpace = 50;
@@ -527,10 +527,10 @@ function resetObjects() {
   }
 }
 function resetModule() {
-  changeGear(80);
-  resetObjects();
+  gear(80);
+  reset();
 }
-function setToContinuous() {
+function continuous() {
   compositeArray[1].alternate = false;
   changeBodyContinuous(1);
   Body.setPosition(compositeArray[0].bodies[0], {
@@ -540,7 +540,7 @@ function setToContinuous() {
   compositeArray[0].constraints[0].stiffness = 0.001;
   compositeArray[1].motorDir = 1;
 }
-function setToAlternatingGear() {
+function alternatingGear() {
   document.getElementById("mirror").disabled = false;
   compositeArray[0].constraints[0].pointA.y = window.innerHeight * 0.5;
   changeBody(1);
