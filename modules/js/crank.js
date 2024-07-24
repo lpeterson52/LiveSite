@@ -361,6 +361,7 @@ function yDistance() {
 }
 
 Events.on(engine, "beforeUpdate", function (event) {});
+const kMotorSpeed = 0.021;
 ////////////////////// RUN /////////////////////////////
 
 // create initial gear parts
@@ -376,7 +377,7 @@ addGearComposite(
 );
 compositeArray[1].isMotor = true;
 compositeArray[1].alternate = true;
-compositeArray[1].motorSpeed = 0.021;
+compositeArray[1].motorSpeed = kMotorSpeed;
 module.motorSpeed = compositeArray[1].motorSpeed * 1000;
 pivotHeight(0);
 ///////////// Change to Crank//////////
