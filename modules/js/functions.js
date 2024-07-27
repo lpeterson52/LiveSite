@@ -634,7 +634,7 @@ function removeComposite(composite) {
           joint.constraints[0].bodyA === composite ||
           joint.constraints[0].bodyB === composite
         ) {
-          for (body in compositeArray) {
+          for (body of compositeArray) {
             if (
               joint.constraints[0].bodyA != composite &&
               joint.constraints[0].bodyA === body.bodies[0]
