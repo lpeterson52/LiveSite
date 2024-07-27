@@ -293,18 +293,20 @@ function walking3Input(value) {
   // console.log(compositeArray[0].bodies[0].vertices[0].x)
   // console.log(tri1PivotY - (100*Math.sin(tri1Angle)))
 }
+const kLineWidth = 2;
+const kStrokeStyle = "#666";
 function walking1(value) {
   // linkageLength = parseInt(value)
   for (let i = 0; i < 4; i++) {
-    jointComposites[i].constraints[0].render.lineWidth = 2;
-    jointComposites[i].constraints[0].render.strokeStyle = "#666";
+    jointComposites[i].constraints[0].render.lineWidth = kLineWidth;
+    jointComposites[i].constraints[0].render.strokeStyle = kStrokeStyle;
   }
 }
 function walking2(value) {
   // linkageLength = parseInt(value)\
   for (let i = 4; i < 8; i++) {
-    jointComposites[i].constraints[0].render.lineWidth = 2;
-    jointComposites[i].constraints[0].render.strokeStyle = "#666";
+    jointComposites[i].constraints[0].render.lineWidth = kLineWidth;
+    jointComposites[i].constraints[0].render.strokeStyle = kStrokeStyle;
   }
 }
 ///////////////// Animation /////////////////////////////////////
