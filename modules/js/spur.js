@@ -8,6 +8,11 @@ let originalWidth1;
 let originalWidth2;
 module.horizontalSpace = 0;
 module.connectorLength = 300;
+const kWindowWidth = 0.75 * 0.5;
+const kWindowWidth1 = 0.75 * 0.45;
+const kWindowHeight = 0.65;
+const kMotorSpeed = 0.051;
+const kToothHeight = 0.6;
 // change the gear body for spur/rotating motion
 function changeBodyRotate(index) {
   if (compositeArray[index].bodies[1]) {
@@ -17,21 +22,21 @@ function changeBodyRotate(index) {
   let tmpConstraintXPoint;
   if (index === 0) {
     tmpConstraintXPoint =
-      window.innerWidth * (0.75 * 0.45) - (radius + toothHeight * 0.6);
+      window.innerWidth * kWindowWidth1 - (radius + toothHeight * kToothHeight);
   } else if (index === 1) {
     tmpConstraintXPoint =
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6);
+      window.innerWidth * kWindowWidth1 + (radius + toothHeight * kToothHeight);
     compositeArray[2].constraints[0].pointA.x =
-      window.innerWidth * (0.75 * 0.45) +
-      (compositeArray[1].radius + toothHeight * 0.6) * 2 +
-      (compositeArray[2].radius + toothHeight * 0.6);
+      window.innerWidth * kWindowWidth1 +
+      (compositeArray[1].radius + toothHeight * kToothHeight) * 2 +
+      (compositeArray[2].radius + toothHeight * kToothHeight);
   } else {
     tmpConstraintXPoint =
-      window.innerWidth * (0.75 * 0.45) +
-      (compositeArray[1].radius + toothHeight * 0.6) * 2 +
-      (compositeArray[2].radius + toothHeight * 0.6);
+      window.innerWidth * kWindowWidth1 +
+      (compositeArray[1].radius + toothHeight * kToothHeight) * 2 +
+      (compositeArray[2].radius + toothHeight * kToothHeight);
   }
-  const tmpConstraintYPoint = window.innerHeight * 0.65;
+  const tmpConstraintYPoint = window.innerHeight * kWindowHeight;
   Composite.remove(compositeArray[index], compositeArray[index].constraints[0]);
   verts2 = [];
   drawGear();
@@ -67,12 +72,12 @@ function changeBodyFlap(index) {
   let tmpConstraintXPoint;
   if (index === 0) {
     tmpConstraintXPoint =
-      window.innerWidth * (0.75 * 0.5) - (radius + toothHeight * 0.6);
+      window.innerWidth * kWindowWidth - (radius + toothHeight * kToothHeight);
   } else {
     tmpConstraintXPoint =
-      window.innerWidth * (0.75 * 0.5) + (radius + toothHeight * 0.6);
+      window.innerWidth * kWindowWidth + (radius + toothHeight * kToothHeight);
   }
-  const tmpConstraintYPoint = window.innerHeight * 0.65;
+  const tmpConstraintYPoint = window.innerHeight * kWindowHeight;
   Composite.remove(compositeArray[index], compositeArray[index].constraints[0]);
   verts2 = [];
   drawGear();
@@ -102,6 +107,7 @@ function changeBodyFlap(index) {
 ///////////////////////////GEAR SIZES////////////////////////////////////////
 /////ROTATING SPUR MOTION///////////////////
 //small = 48, medium = 64, large = 80
+const kSteps = 0.5;
 function changeGear1(rad) {
   // reset angle
   Body.setAngle(compositeArray[0].bodies[0], 0);
@@ -111,7 +117,7 @@ function changeGear1(rad) {
   // store radius
   compositeArray[0].radius = radius;
   // change num of steps
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   // draw and add new gear
@@ -123,7 +129,7 @@ function changeGear2(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[1].radius = radius;
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   changeBodyRotate(1);
@@ -140,7 +146,7 @@ function changeGear3(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[2].radius = radius;
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   changeBodyRotate(2);
@@ -161,7 +167,7 @@ function changeGearL(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[0].radius = radius;
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   changeBodyFlap(0);
@@ -173,7 +179,7 @@ function changeGearR(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[1].radius;
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   changeBodyFlap(1);
@@ -209,15 +215,15 @@ function changeMotion() {
     rectBase = 300;
     // add new gears and beams
     addGearComposite(
-      window.innerWidth * (0.75 * 0.5) - (radius + toothHeight * 0.6),
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth - (radius + toothHeight * kToothHeight),
+      window.innerHeight * kWindowHeight
     );
     addGearComposite(
-      window.innerWidth * (0.75 * 0.5) + (radius + toothHeight * 0.6),
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth + (radius + toothHeight * kToothHeight),
+      window.innerHeight * kWindowHeight
     );
     addFlapRectComposite(
-      window.innerWidth * (0.75 * 0.5) + (width / 2 + 60),
+      window.innerWidth * kWindowWidth + (width / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87 - 36.751 + 150,
       7,
       150,
@@ -225,7 +231,7 @@ function changeMotion() {
       300
     );
     addFlapRectComposite(
-      window.innerWidth * (0.75 * 0.5) - (width / 2 + 60),
+      window.innerWidth * kWindowWidth - (width / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87 - 36.751 + 150,
       7,
       150,
@@ -240,8 +246,8 @@ function changeMotion() {
     createConstraint3(compositeArray[1].bodies[0], compositeArray[2].bodies[0]);
     // set object motor properties
     compositeArray[1].isMotor = true;
-    compositeArray[1].motorSpeed = 0.051;
-    compositeArray[0].motorSpeed = 0.051;
+    compositeArray[1].motorSpeed = kMotorSpeed;
+    compositeArray[0].motorSpeed = kMotorSpeed;
     compositeArray[0].motorDir = -1;
     compositeArray[1].motorDir = 1;
     flapBeamSpaceUpdate();
@@ -255,16 +261,16 @@ function changeMotion() {
     }
     // add new gears and beam
     addGearComposite(
-      window.innerWidth * (0.75 * 0.45) - (radius + toothHeight * 0.6),
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth1 - (radius + toothHeight * kToothHeight),
+      window.innerHeight * kWindowHeight
     );
     addGearComposite(
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6),
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth1 + (radius + toothHeight * kToothHeight),
+      window.innerHeight * kWindowHeight
     );
     addGearComposite(
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6) * 3,
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth1 + (radius + toothHeight * kToothHeight) * 3,
+      window.innerHeight * kWindowHeight
     );
     addRotateRect(
       150,
@@ -274,8 +280,8 @@ function changeMotion() {
     );
     // set object motor properties
     compositeArray[0].isMotor = true;
-    compositeArray[1].motorSpeed = 0.051;
-    compositeArray[0].motorSpeed = 0.051;
+    compositeArray[1].motorSpeed = kMotorSpeed;
+    compositeArray[0].motorSpeed = kMotorSpeed;
     compositeArray[0].motorDir = -1;
     compositeArray[1].motorDir = 1;
   }
@@ -302,8 +308,8 @@ Events.on(engine, "afterUpdate", function (event) {
       compositeArray[0].radius *
       0.8 *
       Math.cos(compositeArray[0].bodies[0].angle);
-    gear1Spacing = window.innerWidth * (0.75 * 0.5) - gear1CenterX;
-    gear2Spacing = gear2CenterX - window.innerWidth * (0.75 * 0.5);
+    gear1Spacing = window.innerWidth * kWindowWidth - gear1CenterX;
+    gear2Spacing = gear2CenterX - window.innerWidth * kWindowWidth;
     beamSpace = Math.round(
       compositeArray[2].constraints[0].pointA.x -
         compositeArray[3].constraints[0].pointA.x
@@ -332,8 +338,8 @@ Events.on(engine, "afterUpdate", function (event) {
     const x3 = gear2ConstraintX;
     const y4 = compositeArray[2].bodies[0].vertices[0].y;
     const y3 = gear2ConstraintY;
-    const d = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-    flapConnectorR = Math.sqrt((x3 - x4) * (x3 - x4) + (y3 - y4) * (y3 - y4));
+    const d = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+    flapConnectorR = Math.sqrt((x3 - x4) ** 2 + (y3 - y4) ** 2);
     flapConnectorL = d;
     const b = Math.sqrt(
       (gear1ConstraintX - rect1ConstraintX) *
@@ -349,13 +355,14 @@ Events.on(engine, "afterUpdate", function (event) {
     );
     const a = 300 + module.flapBeamWidthL;
     const a2 = -1 * (300 + module.flapBeamWidthR);
-    const angleC = Math.acos((a * a + b * b - c * c) / (2 * a * b));
-    const angleC2 = Math.acos((a2 * a2 + b2 * b2 - c2 * c2) / (2 * a2 * b2));
+    const angleC = Math.acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b));
+    const angleC2 = Math.acos((a2 ** 2 + b2 ** 2 - c2 ** 2) / (2 * a2 * b2));
+    const kAngleC = 1.5708;
     const xAngle1 = Math.asin(gear1CenterChangeX / b);
     const xAngle2 = Math.asin(gear2CenterChangeX / b2);
     if (angleC && angleC2) {
-      Body.setAngle(compositeArray[3].bodies[0], angleC - 1.5708 - xAngle1);
-      Body.setAngle(compositeArray[2].bodies[0], angleC2 - 1.5708 - xAngle2);
+      Body.setAngle(compositeArray[3].bodies[0], angleC - kAngleC - xAngle1);
+      Body.setAngle(compositeArray[2].bodies[0], angleC2 - kAngleC - xAngle2);
     }
     Body.setVelocity(compositeArray[3].bodies[0], { x: 0, y: 0 });
     Body.setVelocity(compositeArray[2].bodies[0], { x: 0, y: 0 });
@@ -372,15 +379,15 @@ const width = 300;
 rectBase = 300;
 // add composites when code first runs
 addGearComposite(
-  window.innerWidth * (0.75 * 0.5) - (radius + toothHeight * 0.6),
-  window.innerHeight * 0.65
+  window.innerWidth * kWindowWidth - (radius + toothHeight * kToothHeight),
+  window.innerHeight * kWindowHeight
 );
 addGearComposite(
-  window.innerWidth * (0.75 * 0.5) + (radius + toothHeight * 0.6),
-  window.innerHeight * 0.65
+  window.innerWidth * kWindowWidth + (radius + toothHeight * kToothHeight),
+  window.innerHeight * kWindowHeight
 );
 addFlapRectComposite(
-  window.innerWidth * (0.75 * 0.5) + (width / 2 + 60),
+  window.innerWidth * kWindowWidth + (width / 2 + 60),
   compositeArray[0].constraints[0].pointA.y - rectBase - 87 - 36.751 + 150,
   7,
   150,
@@ -388,7 +395,7 @@ addFlapRectComposite(
   300
 );
 addFlapRectComposite(
-  window.innerWidth * (0.75 * 0.5) - (width / 2 + 60),
+  window.innerWidth * kWindowWidth - (width / 2 + 60),
   compositeArray[0].constraints[0].pointA.y - rectBase - 87 - 36.751 + 150,
   7,
   150,
@@ -403,8 +410,8 @@ createConstraint(compositeArray[0].bodies[0], compositeArray[3].bodies[0]);
 createConstraint3(compositeArray[1].bodies[0], compositeArray[2].bodies[0]);
 // set object motor properties
 compositeArray[1].isMotor = true;
-compositeArray[1].motorSpeed = 0.051;
-compositeArray[0].motorSpeed = 0.051;
+compositeArray[1].motorSpeed = kMotorSpeed;
+compositeArray[0].motorSpeed = kMotorSpeed;
 compositeArray[0].motorDir = -1;
 compositeArray[1].motorDir = 1;
 flapBeamSpaceUpdate();
