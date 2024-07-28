@@ -22,29 +22,29 @@ function showParts() {
   let spur1Radius = 0;
   let spur2Radius = 0;
   let spur3Radius = 0;
+  const kLength = 1.251;
   const walkBottom =
     (compositeArray[0].width * 3 +
       Math.sqrt(
-        compositeArray[0].width * compositeArray[0].width +
-          compositeArray[0].height * compositeArray[0].height
+        compositeArray[0].width ** 2 +
+          compositeArray[0].height ** 2
       )) *
-    1.251 *
-    1.251;
+    kLength ** 2;
   const walkMiddle =
-    (compositeArray[0].width * 3 + walkingVert * 2) * 1.251 * 1.251;
+    (compositeArray[0].width * 3 + walkingVert * 2) * kLength ** 2;
   const walkTop =
     ((compositeArray[0].width * 3 +
       Math.sqrt(
-        compositeArray[0].width * compositeArray[0].width +
-          compositeArray[0].height * compositeArray[0].height
+        compositeArray[0].width ** 2 +
+          compositeArray[0].height ** 2
       ) +
       walkingVert) *
-      1.251 +
+      kLength +
       100) *
-    1.251;
-  const walkLinkage = (linkageLength * 2 + 100 * 3) * 1.251 * 1.251;
-  const triSpace = walkingVert * 1.251 * 1.251;
-  const walkLink = linkageLength * 1.251 * 1.251;
+    kLength;
+  const walkLinkage = (linkageLength * 2 + 100 * 3) * kLength ** 2;
+  const triSpace = walkingVert * kLength ** 2;
+  const walkLink = linkageLength * kLength ** 2;
   // loop through all composites and classify the objects that exist
   for (body of compositeArray) {
     // if shape is continuous then draw continuous gear unless it is in rotate, spur, or planetary module
@@ -69,10 +69,7 @@ function showParts() {
       }
     }
     // if cam draw specific cam shape
-    if (
-      body.shape === "cam" ||
-      body.shape === "shell"
-    ) {
+    if (body.shape === "cam" || body.shape === "shell") {
       if (body.shape === "shell") {
         camType = 1;
       }
@@ -221,8 +218,8 @@ function showParts() {
     localStorage.setItem("walkMiddle", walkMiddle);
     localStorage.setItem("walkBottom", walkBottom);
     localStorage.setItem("walkLinkage", walkLinkage);
-    localStorage.setItem("triWidth", compositeArray[0].width * 1.251 * 1.251);
-    localStorage.setItem("triHeight", compositeArray[0].height * 1.251 * 1.251);
+    localStorage.setItem("triWidth", compositeArray[0].width * kLength ** 2);
+    localStorage.setItem("triHeight", compositeArray[0].height * kLength ** 2);
     localStorage.setItem("triSpace", triSpace);
     localStorage.setItem("walkLink", walkLink);
   } else {
