@@ -29,7 +29,7 @@ function changeGear(rad) {
   toothWidthDegree = 2;
   toothWidth = toothWidthDegree / conversionFactor;
   if (compositeArray[1].shape === "cam") {
-    changeBody2(1);
+    changeBodyToCam(1);
   } else if (compositeArray[1].shape === "shell") {
     changeShell();
   }
@@ -44,7 +44,7 @@ function initializeCam() {
   //change shape of compositeArray[0] - from functions.js
   changeBody5(0, 200);
   //change shape of compositeArray[1] - from functions.js
-  changeBody2(1);
+  changeBodyToCam(1);
   //set positions
   Body.setPosition(compositeArray[0].bodies[0], {
     x: window.innerWidth * kWindowWidth,

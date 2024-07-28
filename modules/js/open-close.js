@@ -42,7 +42,7 @@ function changeGear(rad) {
   // if cam motion then change body with specific function
   if (camMod === true) {
     if (compositeArray[1].shape === "cam") {
-      changeBody2(1);
+      changeBodyToCam(1);
     } else if (compositeArray[1].shape === "shell") {
       changeShell();
     }
@@ -142,7 +142,7 @@ function initializeCam() {
   camWidth = 40;
   // change bodies specific to cam motion
   changeBody5(0, 200);
-  changeBody2(1);
+  changeBodyToCam(1);
   // set positions
   Body.setPosition(compositeArray[0].bodies[0], {
     x: window.innerWidth * kWindowWidth,
