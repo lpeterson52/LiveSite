@@ -33,7 +33,7 @@ const render = Render.create({
 const runner = Runner.create();
 //////// create mouse dragging //////////
 // var mouseConstraint = MouseConstraint.create(engine);
-var world = engine.world;
+const world = engine.world;
 
 // gravity init
 engine.world.gravity.x = 0;
