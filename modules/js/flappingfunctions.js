@@ -226,7 +226,7 @@ function flapBeamWidthR(value) {
   function flapVerticalSpace(value) {
     Body.setAngle(compositeArray[0].bodies[0], 0);
     Body.setAngle(compositeArray[1].bodies[0], 0);
-    var change =
+    const change =
       module.verticalSpace +
       150 -
       (compositeArray[0].constraints[0].pointA.y -
