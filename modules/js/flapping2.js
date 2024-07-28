@@ -59,7 +59,7 @@ function changeBodyFlap(index) {
 }
 //////////////////////////GEAR SIZES/////////////////////////////////
 const kSteps = 0.5;
-function gearL(rad) {
+function changeGearL(rad) {
   // delete linkage constraint
   deleteConstraint(compositeArray[0].bodies[0], compositeArray[3].bodies[0]);
   // reset angle of both gears
@@ -76,11 +76,9 @@ function gearL(rad) {
   changeBodyFlap(0);
   // create linkage constraint
   createConstraint(compositeArray[0].bodies[0], compositeArray[3].bodies[0]);
-
-  // see smallGearL()
 }
-// see gearL()
-function gearR(rad) {
+// see changeGearL()
+function changeGearR(rad) {
   deleteConstraint(compositeArray[1].bodies[0], compositeArray[2].bodies[0]);
   Body.setAngle(compositeArray[0].bodies[0], 0);
   Body.setAngle(compositeArray[1].bodies[0], 0);
@@ -108,7 +106,7 @@ function motorR() {
   compositeArray[1].isMotor = true;
 }
 let c = 300; //Connector Length
-var c2 = -c;
+c2 = -c;
 Events.on(engine, "afterUpdate", function (event) {
   // track changing locations of gears
   const gear2CenterX = compositeArray[1].bodies[0].position.x;
