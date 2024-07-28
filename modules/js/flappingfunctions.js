@@ -1,18 +1,15 @@
-const kWindowWidth = 0.75 * 0.45;
-const kInputLineWidth = 4;
-const kInputStrokeStyle = "#FF3318";
 function flapBeamWidthInputL(value) {
   if (document.getElementById("flapBeamWidthL")) {
     module.flapBeamWidthL = parseInt(value);
-    compositeArray[3].bodies[0].parts[1].render.strokeStyle = kInputStrokeStyle;
-    compositeArray[3].bodies[0].parts[1].render.lineWidth = kInputLineWidth;
+    compositeArray[3].bodies[0].parts[1].render.strokeStyle = "#FF3318";
+    compositeArray[3].bodies[0].parts[1].render.lineWidth = 4;
   }
 }
 function flapBeamWidthInputR(value) {
   if (document.getElementById("flapBeamWidthR")) {
     module.flapBeamWidthR = parseInt(value);
-    compositeArray[2].bodies[0].parts[1].render.strokeStyle = kInputStrokeStyle;
-    compositeArray[2].bodies[0].parts[1].render.lineWidth = kInputLineWidth;
+    compositeArray[2].bodies[0].parts[1].render.strokeStyle = "#FF3318";
+    compositeArray[2].bodies[0].parts[1].render.lineWidth = 4;
   }
 }
 function flapBeamWidthInput(value) {
@@ -21,13 +18,13 @@ function flapBeamWidthInput(value) {
 }
 function flapHeightInputL(value) {
   module.flapBeamHeightL = parseInt(value);
-  compositeArray[3].bodies[0].parts[2].render.strokeStyle = kInputStrokeStyle;
-  compositeArray[3].bodies[0].parts[2].render.lineWidth = kInputLineWidth;
+  compositeArray[3].bodies[0].parts[2].render.strokeStyle = "#FF3318";
+  compositeArray[3].bodies[0].parts[2].render.lineWidth = 4;
 }
 function flapHeightInputR(value) {
   module.flapBeamHeightR = parseInt(value);
-  compositeArray[2].bodies[0].parts[2].render.strokeStyle = kInputStrokeStyle;
-  compositeArray[2].bodies[0].parts[2].render.lineWidth = kInputLineWidth;
+  compositeArray[2].bodies[0].parts[2].render.strokeStyle = "#FF3318";
+  compositeArray[2].bodies[0].parts[2].render.lineWidth = 4;
 }
 function flapHeightInput(value) {
   flapHeightInputR(value);
@@ -36,24 +33,22 @@ function flapHeightInput(value) {
 function flapOffsetInput(value) {
   module.flapBeamOffset = parseInt(value);
   for (let j = 1; j < 3; j++) {
-    compositeArray[2].bodies[0].parts[j].render.strokeStyle = kInputStrokeStyle;
-    compositeArray[3].bodies[0].parts[j].render.strokeStyle = kInputStrokeStyle;
-    compositeArray[2].bodies[0].parts[j].render.lineWidth = kInputLineWidth;
-    compositeArray[3].bodies[0].parts[j].render.lineWidth = kInputLineWidth;
+    compositeArray[2].bodies[0].parts[j].render.strokeStyle = "#FF3318";
+    compositeArray[3].bodies[0].parts[j].render.strokeStyle = "#FF3318";
+    compositeArray[2].bodies[0].parts[j].render.lineWidth = 4;
+    compositeArray[3].bodies[0].parts[j].render.lineWidth = 4;
   }
 }
-const kLengthLineWidth = 2;
-const kLengthStrokeStyle = "#666";
 function flapConstraintLengthL(value) {
   // change c value so that the distance calculated between beam and object is different
   // c is used in the beforeUpdate function in the individual module js files
   c = parseInt(value);
   jointComposites[
     jointComposites.length - 2
-  ].constraints[0].render.lineWidth = kLengthLineWidth;
+  ].constraints[0].render.lineWidth = 2;
   jointComposites[
     jointComposites.length - 2
-  ].constraints[0].render.strokeStyle = kLengthStrokeStyle;
+  ].constraints[0].render.strokeStyle = "#666";
 }
 function flapConstraintLengthR(value) {
   // change c value so that the distance calculated between beam and object is different
@@ -61,15 +56,23 @@ function flapConstraintLengthR(value) {
   c2 = -parseInt(value);
   jointComposites[
     jointComposites.length - 1
-  ].constraints[0].render.lineWidth = kLengthLineWidth;
+  ].constraints[0].render.lineWidth = 2;
   jointComposites[
     jointComposites.length - 1
-  ].constraints[0].render.strokeStyle = kLengthStrokeStyle;
+  ].constraints[0].render.strokeStyle = "#666";
 }
 function flapConstraintLength(value) {
   flapConstraintLengthL(value);
   flapConstraintLengthR(value);
 }
+function flapBeamSpaceUpdate() {
+    Body.setAngle(compositeArray[0].bodies[0], 0);
+    Body.setAngle(compositeArray[1].bodies[0], 0);
+    compositeArray[2].constraints[0].pointA.x =
+      window.innerWidth * (0.75 * 0.5) + (module.horizontalSpace + 100) / 2;
+    compositeArray[3].constraints[0].pointA.x =
+      window.innerWidth * (0.75 * 0.5) - (module.horizontalSpace + 100) / 2;
+  }
 function flapBeamWidthR(value) {
     Body.setAngle(compositeArray[0].bodies[0], 0);
     Body.setAngle(compositeArray[1].bodies[0], 0);
@@ -78,7 +81,7 @@ function flapBeamWidthR(value) {
     removeComposite(compositeArray[2].bodies[0]);
     removeComposite(compositeArray[2].bodies[0]);
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth + (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeightR,
@@ -86,7 +89,7 @@ function flapBeamWidthR(value) {
       module.flapBeamWidthR + 300
     );
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth - (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeightL,
@@ -106,7 +109,7 @@ function flapBeamWidthR(value) {
     removeComposite(compositeArray[2].bodies[0]);
     removeComposite(compositeArray[2].bodies[0]);
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth + (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeightR,
@@ -114,7 +117,7 @@ function flapBeamWidthR(value) {
       module.flapBeamWidthR + 300
     );
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth - (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeightL,
@@ -138,7 +141,7 @@ function flapBeamWidthR(value) {
     removeComposite(compositeArray[2].bodies[0]);
     removeComposite(compositeArray[2].bodies[0]);
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth + (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeightR,
@@ -146,7 +149,7 @@ function flapBeamWidthR(value) {
       module.flapBeamWidthR + 300
     );
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth - (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeightL,
@@ -166,7 +169,7 @@ function flapBeamWidthR(value) {
     removeComposite(compositeArray[2].bodies[0]);
     removeComposite(compositeArray[2].bodies[0]);
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth + (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeightR,
@@ -174,7 +177,7 @@ function flapBeamWidthR(value) {
       module.flapBeamWidthR + 300
     );
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth - (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeightL,
@@ -196,7 +199,7 @@ function flapBeamWidthR(value) {
     removeComposite(compositeArray[2].bodies[0]);
     removeComposite(compositeArray[2].bodies[0]);
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth + (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeight,
@@ -204,7 +207,7 @@ function flapBeamWidthR(value) {
       module.beamWidth + 300
     );
     addFlapRectComposite(
-      window.innerWidth * kWindowWidth - (300 / 2 + 60),
+      window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
       compositeArray[0].constraints[0].pointA.y - rectBase - 87,
       7,
       150 + module.flapBeamHeight,
@@ -215,18 +218,10 @@ function flapBeamWidthR(value) {
     createConstraint3(compositeArray[1].bodies[0], compositeArray[2].bodies[0]);
     flapBeamSpaceUpdate();
   }
-  function flapBeamSpaceUpdate() {
-    Body.setAngle(compositeArray[0].bodies[0], 0);
-    Body.setAngle(compositeArray[1].bodies[0], 0);
-    compositeArray[2].constraints[0].pointA.x =
-      window.innerWidth * kWindowWidth + (module.horizontalSpace + 100) / 2;
-    compositeArray[3].constraints[0].pointA.x =
-      window.innerWidth * kWindowWidth - (module.horizontalSpace + 100) / 2;
-  }
   function flapVerticalSpace(value) {
     Body.setAngle(compositeArray[0].bodies[0], 0);
     Body.setAngle(compositeArray[1].bodies[0], 0);
-    const change =
+    var change =
       module.verticalSpace +
       150 -
       (compositeArray[0].constraints[0].pointA.y -
