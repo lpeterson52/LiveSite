@@ -181,8 +181,8 @@ function pivotHeight(value) {
     prevPivotValue = value;
     pivotValue = value;
   }
-  compositeArray[0].constraints[2].render.lineWidth = lineWidth;
-  compositeArray[0].constraints[2].render.strokeStyle = strokeStyle;
+  compositeArray[0].constraints[2].render.lineWidth = kLineWidth;
+  compositeArray[0].constraints[2].render.strokeStyle = kStrokeStyle;
 }
 // horizontal constraint position on beams
 function constraintPosition(value) {
