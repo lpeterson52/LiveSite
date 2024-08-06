@@ -33,7 +33,7 @@ const render = Render.create({
 const runner = Runner.create();
 //////// create mouse dragging //////////
 // var mouseConstraint = MouseConstraint.create(engine);
-var world = engine.world;
+const world = engine.world;
 
 // gravity init
 engine.world.gravity.x = 0;
@@ -249,12 +249,13 @@ function drawCam() {
   }
 
   verts2 = [];
+  const kRadius = 1.25 * 1.3;
   for (let i = 0; i < steps / 2 + 1; i++) {
-    xValues[i] = radius * 1.25 * 1.3 * Math.cos((2 * Math.PI * i) / steps);
-    yValues[i] = radius * 1.25 * 1.3 * Math.sin((2 * Math.PI * i) / steps);
+    xValues[i] = radius * kRadius * Math.cos((2 * Math.PI * i) / steps);
+    yValues[i] = radius * kRadius * Math.sin((2 * Math.PI * i) / steps);
   }
   for (let i = steps / 2 + 1; i < steps; i++) {
-    xValues[i] = radius * 1.25 * 1.3 * Math.cos((2 * Math.PI * i) / steps);
+    xValues[i] = radius * kRadius * Math.cos((2 * Math.PI * i) / steps);
     yValues[i] =
       (radius * 1.25 + ovalRad) * Math.sin((2 * Math.PI * i) / steps);
   }
@@ -634,7 +635,7 @@ function removeComposite(composite) {
           joint.constraints[0].bodyA === composite ||
           joint.constraints[0].bodyB === composite
         ) {
-          for (body in compositeArray) {
+          for (body of compositeArray) {
             if (
               joint.constraints[0].bodyA != composite &&
               joint.constraints[0].bodyA === body.bodies[0]
@@ -2443,32 +2444,6 @@ function constraintLength(value) {
   }
 }
 var c2 = 0;
-function flapConstraintLengthL(value) {
-  // change c value so that the distance calculated between beam and object is different
-  // c is used in the beforeUpdate function in the individual module js files
-  c = parseInt(value);
-  jointComposites[
-    jointComposites.length - 2
-  ].constraints[0].render.lineWidth = 2;
-  jointComposites[
-    jointComposites.length - 2
-  ].constraints[0].render.strokeStyle = "#666";
-}
-function flapConstraintLengthR(value) {
-  // change c value so that the distance calculated between beam and object is different
-  // c is used in the beforeUpdate function in the individual module js files
-  c2 = -parseInt(value);
-  jointComposites[
-    jointComposites.length - 1
-  ].constraints[0].render.lineWidth = 2;
-  jointComposites[
-    jointComposites.length - 1
-  ].constraints[0].render.strokeStyle = "#666";
-}
-function flapConstraintLength(value) {
-  flapConstraintLengthL(value);
-  flapConstraintLengthR(value);
-}
 let beamWidthChange = 0;
 // change beam width
 function beamWidth(value) {
@@ -2606,151 +2581,6 @@ function beamWidth(value) {
     compositeArray[3].bodies[0].render.lineWidth = 2;
   }
 }
-function flapBeamWidthR(value) {
-  Body.setAngle(compositeArray[0].bodies[0], 0);
-  Body.setAngle(compositeArray[1].bodies[0], 0);
-  deleteConstraint(compositeArray[2].bodies[0], compositeArray[1].bodies[0]);
-  deleteConstraint(compositeArray[3].bodies[0], compositeArray[0].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeightR,
-    module.flapBeamOffset + 50,
-    module.flapBeamWidthR + 300
-  );
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeightL,
-    -(module.flapBeamOffset + 50),
-    -(module.flapBeamWidthL + 300)
-  );
-  createConstraint(compositeArray[0].bodies[0], compositeArray[3].bodies[0]);
-  createConstraint3(compositeArray[1].bodies[0], compositeArray[2].bodies[0]);
-  flapBeamSpaceUpdate();
-  flapVerticalSpace();
-}
-function flapBeamWidthL(value) {
-  Body.setAngle(compositeArray[0].bodies[0], 0);
-  Body.setAngle(compositeArray[1].bodies[0], 0);
-  deleteConstraint(compositeArray[2].bodies[0], compositeArray[1].bodies[0]);
-  deleteConstraint(compositeArray[3].bodies[0], compositeArray[0].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeightR,
-    module.flapBeamOffset + 50,
-    module.flapBeamWidthR + 300
-  );
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeightL,
-    -(module.flapBeamOffset + 50),
-    -(module.flapBeamWidthL + 300)
-  );
-  createConstraint(compositeArray[0].bodies[0], compositeArray[3].bodies[0]);
-  createConstraint3(compositeArray[1].bodies[0], compositeArray[2].bodies[0]);
-  flapBeamSpaceUpdate();
-  flapVerticalSpace();
-}
-function flapBeamWidth(value) {
-  flapBeamWidthR(value);
-  flapBeamWidthL(value);
-}
-function flapBeamHeightR(value) {
-  Body.setAngle(compositeArray[0].bodies[0], 0);
-  Body.setAngle(compositeArray[1].bodies[0], 0);
-  deleteConstraint(compositeArray[2].bodies[0], compositeArray[1].bodies[0]);
-  deleteConstraint(compositeArray[3].bodies[0], compositeArray[0].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeightR,
-    module.flapBeamOffset + 50,
-    module.flapBeamWidthR + 300
-  );
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeightL,
-    -(module.flapBeamOffset + 50),
-    -(module.flapBeamWidthL + 300)
-  );
-  createConstraint(compositeArray[0].bodies[0], compositeArray[3].bodies[0]);
-  createConstraint3(compositeArray[1].bodies[0], compositeArray[2].bodies[0]);
-  flapBeamSpaceUpdate();
-  flapVerticalSpace();
-}
-function flapBeamHeightL(value) {
-  Body.setAngle(compositeArray[0].bodies[0], 0);
-  Body.setAngle(compositeArray[1].bodies[0], 0);
-  deleteConstraint(compositeArray[2].bodies[0], compositeArray[1].bodies[0]);
-  deleteConstraint(compositeArray[3].bodies[0], compositeArray[0].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeightR,
-    module.flapBeamOffset + 50,
-    module.flapBeamWidthR + 300
-  );
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeightL,
-    -(module.flapBeamOffset + 50),
-    -(module.flapBeamWidthL + 300)
-  );
-  createConstraint(compositeArray[0].bodies[0], compositeArray[3].bodies[0]);
-  createConstraint3(compositeArray[1].bodies[0], compositeArray[2].bodies[0]);
-  flapBeamSpaceUpdate();
-  flapVerticalSpace();
-}
-function flapBeamHeight(value) {
-  flapBeamHeightR(value);
-  flapBeamHeightL(value);
-}
-function flapBeamOffset(value) {
-  deleteConstraint(compositeArray[2].bodies[0], compositeArray[1].bodies[0]);
-  deleteConstraint(compositeArray[3].bodies[0], compositeArray[0].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  removeComposite(compositeArray[2].bodies[0]);
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) + (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeight,
-    module.flapBeamOffset + 50,
-    module.beamWidth + 300
-  );
-  addFlapRectComposite(
-    window.innerWidth * (0.75 * 0.5) - (300 / 2 + 60),
-    compositeArray[0].constraints[0].pointA.y - rectBase - 87,
-    7,
-    150 + module.flapBeamHeight,
-    -(module.flapBeamOffset + 50),
-    -(module.beamWidth + 300)
-  );
-  createConstraint(compositeArray[0].bodies[0], compositeArray[3].bodies[0]);
-  createConstraint3(compositeArray[1].bodies[0], compositeArray[2].bodies[0]);
-  flapBeamSpaceUpdate();
-}
 function flapBeamSpaceUpdate() {
   Body.setAngle(compositeArray[0].bodies[0], 0);
   Body.setAngle(compositeArray[1].bodies[0], 0);
@@ -2758,20 +2588,6 @@ function flapBeamSpaceUpdate() {
     window.innerWidth * (0.75 * 0.5) + (module.horizontalSpace + 100) / 2;
   compositeArray[3].constraints[0].pointA.x =
     window.innerWidth * (0.75 * 0.5) - (module.horizontalSpace + 100) / 2;
-}
-function flapVerticalSpace(value) {
-  Body.setAngle(compositeArray[0].bodies[0], 0);
-  Body.setAngle(compositeArray[1].bodies[0], 0);
-  var change =
-    module.verticalSpace +
-    150 -
-    (compositeArray[0].constraints[0].pointA.y -
-      compositeArray[2].constraints[0].pointA.y);
-  console.log(change);
-  compositeArray[2].constraints[0].pointA.y =
-    compositeArray[0].constraints[0].pointA.y - (module.verticalSpace + 150);
-  compositeArray[3].constraints[0].pointA.y =
-    compositeArray[0].constraints[0].pointA.y - (module.verticalSpace + 150);
 }
 pivot2Value = 50;
 let changePivot2Height;

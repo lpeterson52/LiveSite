@@ -2,6 +2,9 @@
 rotateModule = true;
 spurMod = true;
 planetaryMod = false;
+const kWindowWidth = 0.75 * 0.45;
+const kWindowHeight = 0.65;
+const kMotorSpeed = 0.051;
 // change gear body when changing size when in rotating motion
 function changeBodyRotate(index) {
     // remove ui motor sprite body
@@ -14,21 +17,21 @@ function changeBodyRotate(index) {
     let tmpConstraintXPoint;
     if (index === 0) {
       tmpConstraintXPoint =
-        window.innerWidth * (0.75 * 0.45) - (radius + toothHeight * 0.6);
+        window.innerWidth * kWindowWidth - (radius + toothHeight * 0.6);
     } else if (index === 1) {
       tmpConstraintXPoint =
-        window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6);
+        window.innerWidth * kWindowWidth + (radius + toothHeight * 0.6);
       compositeArray[2].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.45) +
+        window.innerWidth * kWindowWidth +
         (compositeArray[1].radius + toothHeight * 0.6) * 2 +
         (compositeArray[2].radius + toothHeight * 0.6);
     } else {
       tmpConstraintXPoint =
-        window.innerWidth * (0.75 * 0.45) +
+        window.innerWidth * kWindowWidth +
         (compositeArray[1].radius + toothHeight * 0.6) * 2 +
         (compositeArray[2].radius + toothHeight * 0.6);
     }
-    const tmpConstraintYPoint = window.innerHeight * 0.65;
+    const tmpConstraintYPoint = window.innerHeight * kWindowHeight;
     // remove constraints
     Composite.remove(
       compositeArray[index],
@@ -103,9 +106,9 @@ function changeBodyPlanetary(index) {
     }
   Body.setPosition(compositeArray[1].bodies[0], {
     x:
-      window.innerWidth * (0.75 * 0.45) -
+      window.innerWidth * kWindowWidth -
       (compositeArray[1].radius + toothHeight * 0.6),
-    y: window.innerHeight * 0.65,
+    y: window.innerHeight * kWindowHeight,
   });
   Composite.remove(compositeArray[1], compositeArray[1].constraints[0]);
   Body.setPosition(compositeArray[1].bodies[0], {
@@ -114,7 +117,7 @@ function changeBodyPlanetary(index) {
       compositeArray[0].radius -
       compositeArray[1].radius -
       toothHeight * 0.6 * 2,
-    y: window.innerHeight * 0.65,
+    y: window.innerHeight * kWindowHeight,
   });
   Composite.add(
     compositeArray[1],
@@ -191,10 +194,11 @@ function addPlanetaryGearComposite(centerX, centerY, constraintX, constraintY) {
   // add composite to the world
   World.add(engine.world, [compositeArray[totalComposites - 1]]);
   compositeArray[1].isMotor = true;
-  compositeArray[1].motorSpeed = 0.051;
+  compositeArray[1].motorSpeed = kMotorSpeed;
   compositeArray[1].motorDir = -1;
 }
 //////////////////////////////////////CHANGE GEAR SIZE//////////////////////////////////////
+const kSteps = 0.5;
 function changeGear1(rad) {
   // reset angle
   Body.setAngle(compositeArray[0].bodies[0], 0);
@@ -203,7 +207,7 @@ function changeGear1(rad) {
   radius = rad;
   compositeArray[0].radius = radius;
   // set new steps
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   // change the gear body
@@ -215,7 +219,7 @@ function changeGear2(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[1].radius = radius;
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   changeBodyRotate(1);
@@ -233,7 +237,7 @@ function changeGear3(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[2].radius = radius;
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   changeBodyRotate(2);
@@ -251,7 +255,7 @@ function changeRotatingGear(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[1].radius = radius;
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   removeComposite(compositeArray[1].bodies[0]);
@@ -260,7 +264,7 @@ function changeRotatingGear(rad) {
       compositeArray[0].radius -
       radius -
       toothHeight * 0.6 * 2,
-    window.innerHeight * 0.65,
+    window.innerHeight * kWindowHeight,
     compositeArray[0].constraints[0].pointA.x,
     compositeArray[0].constraints[0].pointA.y
   );
@@ -271,7 +275,7 @@ function changeStaticGear(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[0].radius = radius;
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   changeBodyPlanetary(0);
@@ -310,21 +314,21 @@ function changeMech() {
     // radius = gear1Radius
     // steps = (0.25 * radius)*2;
     addGearComposite(
-      window.innerWidth * (0.75 * 0.45) - (radius + toothHeight * 0.6),
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth - (radius + toothHeight * 0.6),
+      window.innerHeight * kWindowHeight
     );
     // radius = gear2Radius
     // steps = (0.25 * radius)*2;
     addGearComposite(
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6),
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth + (radius + toothHeight * 0.6),
+      window.innerHeight * kWindowHeight
     );
     // radius = 80
     // steps = (0.25 * radius)*2;
-    // addGearComposite((window.innerWidth)*(0.75*0.45)+((compositeArray[0].radius + (toothHeight*1)) + (compositeArray[1].radius + (toothHeight*1)) + (radius+(toothHeight*1))), (window.innerHeight)*(0.65));
+    // addGearComposite((window.innerWidth)*(0.75*0.45)+((compositeArray[0].radius + (toothHeight*1)) + (compositeArray[1].radius + (toothHeight*1)) + (radius+(toothHeight*1))), (window.innerHeight)*(kWindowHeight));
     addGearComposite(
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6) * 3,
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth + (radius + toothHeight * 0.6) * 3,
+      window.innerHeight * kWindowHeight
     );
     // add rotating beam
     addRotateRect(
@@ -335,8 +339,8 @@ function changeMech() {
     );
     // set properties of new objects in simulation
     compositeArray[0].isMotor = true;
-    compositeArray[1].motorSpeed = 0.051;
-    compositeArray[0].motorSpeed = 0.051;
+    compositeArray[1].motorSpeed = kMotorSpeed;
+    compositeArray[0].motorSpeed = kMotorSpeed;
     compositeArray[0].motorDir = -1;
     compositeArray[1].motorDir = 1;
   } else if (string === "planetary") {
@@ -354,22 +358,22 @@ function changeMech() {
     // radius = gear1Radius
     // steps = (0.25 * radius)*2;
     addGearComposite(
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6),
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth + (radius + toothHeight * 0.6),
+      window.innerHeight * kWindowHeight
     );
     // radius = gear2Radius
     // steps = (0.25 * radius)*2;
     addPlanetaryGearComposite(
-      window.innerWidth * (0.75 * 0.45) - (radius + toothHeight * 0.6),
-      window.innerHeight * 0.65,
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6),
-      window.innerHeight * 0.65
+      window.innerWidth * kWindowWidth - (radius + toothHeight * 0.6),
+      window.innerHeight * kWindowHeight,
+      window.innerWidth * kWindowWidth + (radius + toothHeight * 0.6),
+      window.innerHeight * kWindowHeight
     );
     // set new properties of simulation objects
     compositeArray[1].isMotor = true;
     compositeArray[0].lock = true;
-    compositeArray[0].motorSpeed = 0.051;
-    compositeArray[1].motorSpeed = 0.051;
+    compositeArray[0].motorSpeed = kMotorSpeed;
+    compositeArray[1].motorSpeed = kMotorSpeed;
     compositeArray[1].motorDir = -1;
     compositeArray[0].motorDir = 1;
   }
@@ -392,7 +396,7 @@ Events.on(engine, "beforeUpdate", function (event) {
     const y1 = compositeArray[1].bodies[0].position.y;
     const y2 = compositeArray[0].constraints[0].pointA.y;
     planetaryBrace = Math.floor(
-      Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
+      Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
     );
     console.log(planetaryBrace);
   }
@@ -407,16 +411,16 @@ Events.on(engine, "beforeUpdate", function (event) {
 ////////////////////// RUN /////////////////////////////
 // add gears when code first runs
 addGearComposite(
-  window.innerWidth * (0.75 * 0.45) - (radius + toothHeight * 0.6),
-  window.innerHeight * 0.65
+  window.innerWidth * kWindowWidth - (radius + toothHeight * 0.6),
+  window.innerHeight * kWindowHeight
 );
 addGearComposite(
-  window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6),
-  window.innerHeight * 0.65
+  window.innerWidth * kWindowWidth + (radius + toothHeight * 0.6),
+  window.innerHeight * kWindowHeight
 );
 addGearComposite(
-  window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 0.6) * 3,
-  window.innerHeight * 0.65
+  window.innerWidth * kWindowWidth + (radius + toothHeight * 0.6) * 3,
+  window.innerHeight * kWindowHeight
 );
 // add rotating beam
 addRotateRect(
@@ -427,8 +431,8 @@ addRotateRect(
 );
 // change properties of new gears
 compositeArray[0].isMotor = true;
-compositeArray[1].motorSpeed = 0.051;
-compositeArray[0].motorSpeed = 0.051;
+compositeArray[1].motorSpeed = kMotorSpeed;
+compositeArray[0].motorSpeed = kMotorSpeed;
 compositeArray[0].motorDir = -1;
 compositeArray[1].motorDir = 1;
 // run the engine

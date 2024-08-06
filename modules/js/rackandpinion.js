@@ -5,9 +5,13 @@ const rectBase = 600;
 let originalWidth1;
 let originalWidth2;
 module.verticalSpace = 0;
+const kWindowWidth = 0.75 * 0.45;
+const kWindowHeight = 0.5;
 // generate small gear
 ///////////////////////////GEAR SIZE///////////////////////////////////
-function gear(rad) {
+function changeGear(rad) {
+  const kWindowWidth1 = 0.75 * 0.5;
+  const kSteps = 0.5;
   angleFactor = 0.21;
   deleteConstraint(compositeArray[1].bodies[0], compositeArray[0].bodies[0]);
   Body.setPosition(compositeArray[0].bodies[0], {
@@ -17,7 +21,7 @@ function gear(rad) {
   Body.setAngle(compositeArray[1].bodies[0], 0);
   radius = rad;
   compositeArray[1].radius = radius;
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   if (compositeArray[1].alternate === false) {
@@ -26,33 +30,33 @@ function gear(rad) {
     changeBody(1);
   }
   compositeArray[1].constraints[0].pointA.x =
-    window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8);
+    window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8);
   if (shared === true) {
     if (flipY === true) {
       compositeArray[compositeArray.length - 3].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.45) + radius * 2 + toothHeight * 2 + 25;
+        window.innerWidth * kWindowWidth + radius * 2 + toothHeight * 2 + 25;
     } else {
       compositeArray[compositeArray.length - 1].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.45) + radius * 2 + toothHeight * 2 + 25;
+        window.innerWidth * kWindowWidth + radius * 2 + toothHeight * 2 + 25;
     }
   }
   if (paired === true) {
     if (flipY === true) {
       changeBody(compositeArray.length - 4);
       compositeArray[1].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.5) - (radius + toothHeight / 2);
+        window.innerWidth * kWindowWidth1 - (radius + toothHeight / 2);
       compositeArray[0].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.5) -
+        window.innerWidth * kWindowWidth1 -
         (2 * radius + toothHeight) -
         toothHeight -
         5;
       compositeArray[compositeArray.length - 3].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.5) +
+        window.innerWidth * kWindowWidth1 +
         (2 * radius + toothHeight) +
         toothHeight +
         5;
       compositeArray[compositeArray.length - 4].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.5) + radius + toothHeight / 2;
+        window.innerWidth * kWindowWidth1 + radius + toothHeight / 2;
       compositeArray[compositeArray.length - 4].rotation = Math.PI;
       Body.setAngle(
         compositeArray[compositeArray.length - 4].bodies[0],
@@ -62,19 +66,19 @@ function gear(rad) {
     } else {
       changeBody(compositeArray.length - 2);
       compositeArray[1].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.5) - (radius + toothHeight / 2);
+        window.innerWidth * kWindowWidth1 - (radius + toothHeight / 2);
       compositeArray[0].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.5) -
+        window.innerWidth * kWindowWidth1 -
         (2 * radius + toothHeight) -
         toothHeight -
         5;
       compositeArray[compositeArray.length - 1].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.5) +
+        window.innerWidth * kWindowWidth1 +
         (2 * radius + toothHeight) +
         toothHeight +
         5;
       compositeArray[compositeArray.length - 2].constraints[0].pointA.x =
-        window.innerWidth * (0.75 * 0.5) + radius + toothHeight / 2;
+        window.innerWidth * kWindowWidth1 + radius + toothHeight / 2;
       compositeArray[compositeArray.length - 2].rotation = Math.PI;
       Body.setAngle(
         compositeArray[compositeArray.length - 2].bodies[0],
@@ -91,7 +95,7 @@ function changeMotion() {
   const string = document.getElementById("changeMotion").value;
   if (string === "upDown") {
     // reset and remove all constraints
-    reset();
+    resetObjects();
     removeUIConstraints(compositeArray[0]);
     deleteConstraint(compositeArray[3].bodies[0], compositeArray[0].bodies[0]);
     deleteConstraint(compositeArray[2].bodies[0], compositeArray[0].bodies[0]);
@@ -106,25 +110,25 @@ function changeMotion() {
     // reset angle
     Body.setAngle(compositeArray[1].bodies[0], 0);
     // set constraint positions
-    compositeArray[1].constraints[0].pointA.y = window.innerHeight * 0.5;
-    compositeArray[0].constraints[0].pointA.y = window.innerHeight * 0.5;
+    compositeArray[1].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
+    compositeArray[0].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
     compositeArray[1].constraints[0].pointA.x =
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8);
+      window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8);
     compositeArray[0].constraints[0].pointA.x =
-      window.innerWidth * (0.75 * 0.45);
+      window.innerWidth * kWindowWidth;
     // set positions
     Body.setPosition(compositeArray[1].bodies[0], {
-      x: window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8),
-      y: window.innerHeight * 0.5,
+      x: window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8),
+      y: window.innerHeight * kWindowHeight,
     });
     Body.setPosition(compositeArray[0].bodies[0], {
       x: compositeArray[0].bodies[0].position.x,
-      y: window.innerHeight * 0.5 + 130,
+      y: window.innerHeight * kWindowHeight + 130,
     });
     compositeArray[0].constraints[0].stiffness = 0.001;
   } else if (string === "openClose") {
     // reset everything
-    reset();
+    resetObjects();
     // create constraints between ui components
     createUIConstraints(compositeArray[0], prevSpaceValue, prevPivotValue, 6);
     for (let i = compositeArray.length - 1; i > 1; i--) {
@@ -138,29 +142,29 @@ function changeMotion() {
     // reset angle
     Body.setAngle(compositeArray[1].bodies[0], 0);
     // set constraint positions
-    compositeArray[1].constraints[0].pointA.y = window.innerHeight * 0.5;
-    compositeArray[0].constraints[0].pointA.y = window.innerHeight * 0.5;
+    compositeArray[1].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
+    compositeArray[0].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
     // set body positions
     Body.setPosition(compositeArray[1].bodies[0], {
-      x: window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8),
-      y: window.innerHeight * 0.5,
+      x: window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8),
+      y: window.innerHeight * kWindowHeight,
     });
     Body.setPosition(compositeArray[0].bodies[0], {
       x: compositeArray[0].bodies[0].position.x,
-      y: window.innerHeight * 0.5 + 130,
+      y: window.innerHeight * kWindowHeight + 130,
     });
     compositeArray[0].constraints[0].stiffness = 0.001;
     // add new open close beams
     addRectComposite(
       300,
       5,
-      window.innerWidth * (0.75 * 0.45) - 200,
+      window.innerWidth * kWindowWidth - 200,
       compositeArray[0].constraints[0].pointA.y - rectBase
     );
     addRectComposite(
       -300,
       5,
-      window.innerWidth * (0.75 * 0.45) + 200,
+      window.innerWidth * kWindowWidth + 200,
       compositeArray[0].constraints[0].pointA.y - rectBase
     );
     // store original beam widths
@@ -223,7 +227,7 @@ function mirror() {
       });
       // add new gear composite
       addGearComposite(
-        window.innerWidth * (0.75 * 0.45) +
+        window.innerWidth * kWindowWidth +
           (radius + toothHeight * 1.8) +
           (radius + toothHeight / 2),
         compositeArray[0].constraints[0].pointA.y
@@ -244,12 +248,12 @@ function mirror() {
           radius * 3 +
           toothHeight * 2 +
           15,
-        window.innerHeight * 0.5
+        window.innerHeight * kWindowHeight
       );
       // set position and rotation of new lingear
       Body.setPosition(compositeArray[compositeArray.length - 1].bodies[0], {
         x: compositeArray[compositeArray.length - 1].constraints[0].pointA.x,
-        y: window.innerHeight * 0.5 + 130,
+        y: window.innerHeight * kWindowHeight + 130,
       });
       compositeArray[compositeArray.length - 1].rotation = Math.PI;
     } else if (document.getElementById("shared").checked) {
@@ -267,7 +271,7 @@ function mirror() {
       });
       // add new lingear
       addLinGearComposite(
-        window.innerWidth * (0.75 * 0.45) + radius * 2 + toothHeight * 2 + 25,
+        window.innerWidth * kWindowWidth + radius * 2 + toothHeight * 2 + 25,
         compositeArray[1].constraints[0].pointA.y
       );
       // set lingear positoin
@@ -299,7 +303,7 @@ function mirror() {
       });
       // add new gear composite
       addGearComposite(
-        window.innerWidth * (0.75 * 0.45) +
+        window.innerWidth * kWindowWidth +
           (radius + toothHeight * 1.8) +
           (radius + toothHeight / 2),
         compositeArray[0].constraints[0].pointA.y
@@ -371,16 +375,16 @@ function mirror() {
       Body.setAngle(compositeArray[1].bodies[0], 0);
       Body.setPosition(compositeArray[0].bodies[0], {
         x: compositeArray[0].bodies[0].position.x,
-        y: window.innerHeight * 0.5 + 130,
+        y: window.innerHeight * kWindowHeight + 130,
       });
       // add new lingear composite
       addLinGearComposite(
-        window.innerWidth * (0.75 * 0.45) + radius * 2 + toothHeight * 2 + 25,
+        window.innerWidth * kWindowWidth + radius * 2 + toothHeight * 2 + 25,
         compositeArray[1].constraints[0].pointA.y
       );
       Body.setPosition(compositeArray[compositeArray.length - 1].bodies[0], {
         x: compositeArray[compositeArray.length - 1].bodies[0].position.x,
-        y: window.innerHeight * 0.5 - 130,
+        y: window.innerHeight * kWindowHeight - 130,
       });
       // set rotation of lingear
       compositeArray[compositeArray.length - 1].rotation = Math.PI;
@@ -425,7 +429,7 @@ function mirror() {
   overlay3();
 }
 // reset all objects in simulation
-function reset() {
+function resetObjects() {
   // reset variables
   prevSpaceValue = 50;
   module.horizontalSpace = 50;
@@ -461,32 +465,32 @@ function reset() {
     // reset angles
     Body.setAngle(compositeArray[1].bodies[0], 0);
     // reset positions
-    compositeArray[1].constraints[0].pointA.y = window.innerHeight * 0.5;
-    compositeArray[0].constraints[0].pointA.y = window.innerHeight * 0.5;
+    compositeArray[1].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
+    compositeArray[0].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
     compositeArray[1].constraints[0].pointA.x =
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8);
+      window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8);
     compositeArray[0].constraints[0].pointA.x =
-      window.innerWidth * (0.75 * 0.45);
+      window.innerWidth * kWindowWidth;
     Body.setPosition(compositeArray[1].bodies[0], {
-      x: window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8),
-      y: window.innerHeight * 0.5,
+      x: window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8),
+      y: window.innerHeight * kWindowHeight,
     });
     Body.setPosition(compositeArray[0].bodies[0], {
       x: compositeArray[0].bodies[0].position.x,
-      y: window.innerHeight * 0.5 + 130,
+      y: window.innerHeight * kWindowHeight + 130,
     });
     compositeArray[0].constraints[0].stiffness = 0.001;
     // add new open close beams
     addRectComposite(
       300,
       5,
-      window.innerWidth * (0.75 * 0.45) - 200,
+      window.innerWidth * kWindowWidth - 200,
       compositeArray[1].constraints[0].pointA.y - 600
     );
     addRectComposite(
       -300,
       5,
-      window.innerWidth * (0.75 * 0.45) + 200,
+      window.innerWidth * kWindowWidth + 200,
       compositeArray[1].constraints[0].pointA.y - 600
     );
     // create new linkage constraints
@@ -508,27 +512,27 @@ function reset() {
     // reset angles
     Body.setAngle(compositeArray[1].bodies[0], 0);
     // reset constraint positions
-    compositeArray[1].constraints[0].pointA.y = window.innerHeight * 0.5;
-    compositeArray[0].constraints[0].pointA.y = window.innerHeight * 0.5;
+    compositeArray[1].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
+    compositeArray[0].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
     compositeArray[1].constraints[0].pointA.x =
-      window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8);
+      window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8);
     compositeArray[0].constraints[0].pointA.x =
-      window.innerWidth * (0.75 * 0.45);
+      window.innerWidth * kWindowWidth;
     // set new positions
     Body.setPosition(compositeArray[1].bodies[0], {
-      x: window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8),
-      y: window.innerHeight * 0.5,
+      x: window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8),
+      y: window.innerHeight * kWindowHeight,
     });
     Body.setPosition(compositeArray[0].bodies[0], {
       x: compositeArray[0].bodies[0].position.x,
-      y: window.innerHeight * 0.5 + 130,
+      y: window.innerHeight * kWindowHeight + 130,
     });
     compositeArray[0].constraints[0].stiffness = 0.001;
   }
 }
 function resetModule() {
-  gear(80);
-  reset();
+  changeGear(80);
+  resetObjects();
 }
 function continuous() {
   compositeArray[1].alternate = false;
@@ -542,7 +546,7 @@ function continuous() {
 }
 function alternatingGear() {
   document.getElementById("mirror").disabled = false;
-  compositeArray[0].constraints[0].pointA.y = window.innerHeight * 0.5;
+  compositeArray[0].constraints[0].pointA.y = window.innerHeight * kWindowHeight;
   changeBody(1);
   Body.setPosition(compositeArray[0].bodies[0], {
     x: compositeArray[0].constraints[0].pointA.x,
@@ -559,6 +563,9 @@ let prevSpaceValue = 50;
 let changeSpaceWidth = 0;
 beamSpace = 50;
 let modified = false;
+//rendering consts
+const kLineWidth = 2;
+const kStrokeStyle = "#666";
 function beamSpacing(value) {
   changeSpaceWidth = value - prevSpaceValue;
   if (openCloseMod) {
@@ -614,23 +621,23 @@ function beamSpacing(value) {
   }
   prevSpaceValue = value;
   beamSpace = parseInt(value);
-  compositeArray[0].constraints[1].render.lineWidth = 2;
-  compositeArray[0].constraints[1].render.strokeStyle = "#666";
+  compositeArray[0].constraints[1].render.lineWidth = kLineWidth;
+  compositeArray[0].constraints[1].render.strokeStyle = kStrokeStyle;
   if (mirrored) {
     if (openCloseMod) {
       compositeArray[
         compositeArray.length - 3
-      ].constraints[1].render.lineWidth = 2;
+      ].constraints[1].render.lineWidth = kLineWidth;
       compositeArray[
         compositeArray.length - 3
-      ].constraints[1].render.strokeStyle = "#666";
+      ].constraints[1].render.strokeStyle = kStrokeStyle;
     } else {
       compositeArray[
         compositeArray.length - 1
-      ].constraints[1].render.lineWidth = 2;
+      ].constraints[1].render.lineWidth = kLineWidth;
       compositeArray[
         compositeArray.length - 1
-      ].constraints[1].render.strokeStyle = "#666";
+      ].constraints[1].render.strokeStyle = kStrokeStyle;
     }
   }
 }
@@ -674,23 +681,23 @@ function pivotHeight(value) {
     pivotValue = value;
     console.log("Pivot Value = " + value);
   }
-  compositeArray[0].constraints[2].render.lineWidth = 2;
-  compositeArray[0].constraints[2].render.strokeStyle = "#666";
+  compositeArray[0].constraints[2].render.lineWidth = kLineWidth;
+  compositeArray[0].constraints[2].render.strokeStyle = kStrokeStyle;
   if (mirrored) {
     if (openCloseMod) {
       compositeArray[
         compositeArray.length - 3
-      ].constraints[2].render.lineWidth = 2;
+      ].constraints[2].render.lineWidth = kLineWidth;
       compositeArray[
         compositeArray.length - 3
-      ].constraints[2].render.strokeStyle = "#666";
+      ].constraints[2].render.strokeStyle = kStrokeStyle;
     } else {
       compositeArray[
         compositeArray.length - 1
-      ].constraints[2].render.lineWidth = 2;
+      ].constraints[2].render.lineWidth = kLineWidth;
       compositeArray[
         compositeArray.length - 1
-      ].constraints[2].render.strokeStyle = "#666";
+      ].constraints[2].render.strokeStyle = kStrokeStylef;
     }
   }
 }
@@ -778,10 +785,11 @@ Events.on(engine, "afterUpdate", function (event) {
     const top = compositeArray[0].bodies[0].position.y - 200 - pivotValue;
     const b = top - bottom;
     const a = compositeArray[2].width;
-    const angleC = Math.acos((a * a + b * b - c * c) / (2 * a * b));
+    const angleC = Math.acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b));
+    const kAngleC = 1.5708;
     if (angleC) {
-      Body.setAngle(compositeArray[2].bodies[0], angleC - 1.5708);
-      Body.setAngle(compositeArray[3].bodies[0], -(angleC - 1.5708));
+      Body.setAngle(compositeArray[2].bodies[0], angleC - kAngleC);
+      Body.setAngle(compositeArray[3].bodies[0], -(angleC - kAngleC));
       if (flipY) {
         const bottom2 =
           compositeArray[compositeArray.length - 3].constraints[0].pointA.y +
@@ -792,24 +800,24 @@ Events.on(engine, "afterUpdate", function (event) {
           pivotValue;
         const b2 = bottom2 - top2;
         const a2 = compositeArray[compositeArray.length - 1].width;
-        const angleC2 = Math.acos((a2 * a2 + b2 * b2 - c * c) / (2 * a2 * b2));
+        const angleC2 = Math.acos((a2 ** 2 + b2 ** 2 - c ** 2) / (2 * a2 * b2));
         if (paired) {
           Body.setAngle(
             compositeArray[compositeArray.length - 2].bodies[0],
-            angleC2 - 1.5708
+            angleC2 - kAngleC
           );
           Body.setAngle(
             compositeArray[compositeArray.length - 1].bodies[0],
-            -(angleC2 - 1.5708)
+            -(angleC2 - kAngleC)
           );
         } else if (shared) {
           Body.setAngle(
             compositeArray[compositeArray.length - 2].bodies[0],
-            angleC2 - 1.5708
+            angleC2 - kAngleC
           );
           Body.setAngle(
             compositeArray[compositeArray.length - 1].bodies[0],
-            -(angleC2 - 1.5708)
+            -(angleC2 - kAngleC)
           );
         }
       }
@@ -891,17 +899,14 @@ Events.on(engine, "afterUpdate", function (event) {
 ////////////////////// RUN /////////////////////////////
 
 // add initial objects to simulation when code first runs
-addLinGearComposite(
-  window.innerWidth * (0.75 * 0.45),
-  window.innerHeight * 0.5
-);
+addLinGearComposite(window.innerWidth * kWindowWidth, window.innerHeight * kWindowHeight);
 addGearComposite(
-  window.innerWidth * (0.75 * 0.45) + (radius + toothHeight * 1.8),
-  window.innerHeight * 0.5
+  window.innerWidth * kWindowWidth + (radius + toothHeight * 1.8),
+  window.innerHeight * kWindowHeight
 );
 Body.setPosition(compositeArray[0].bodies[0], {
   x: compositeArray[0].bodies[0].position.x,
-  y: window.innerHeight * 0.5 + 130,
+  y: window.innerHeight * kWindowHeight + 130,
 });
 compositeArray[1].isMotor = true;
 compositeArray[1].alternate = true;

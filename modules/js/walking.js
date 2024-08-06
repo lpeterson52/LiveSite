@@ -11,9 +11,12 @@ let walkingVert = 0;
 let walkingVerticalValue = 63;
 const triangleHeight = 100;
 const triangleWidth = 100;
+const kWindowWidth = 0.75 * 0.5;
+const kWindowHeight = 0.5;
 
 /////////////////////////GEAR SIZES//////////////////////////////////////////////
 function changeGear(rad) {
+  const kSteps = 0.5;
   // delete ui sprite body
   deleteConstraint(compositeArray[0].bodies[0], compositeArray[1].bodies[0]);
   // reset angle to 0
@@ -23,7 +26,7 @@ function changeGear(rad) {
   // store new radius value
   compositeArray[1].radius = radius;
   // change number of steps for drawing gear
-  steps = 0.25 * radius * 2;
+  steps = radius * kSteps;
   toothWidthDegree = 4;
   toothWidth = toothWidthDegree / conversionFactor;
   // draw and add new body
@@ -34,7 +37,7 @@ function changeGear(rad) {
     y: compositeArray[0].constraints[0].pointA.y,
   });
   Body.setPosition(compositeArray[1].bodies[0], {
-    x: window.innerWidth * (0.75 * 0.5),
+    x: window.innerWidth * kWindowWidth,
     y: compositeArray[1].constraints[0].pointA.y,
   });
   // create new linkage constraint
@@ -42,7 +45,8 @@ function changeGear(rad) {
 }
 ////////////////////////////////////////////////////////////////////////////////
 function degrees(value) {
-  return value * 0.0174533;
+  const kDegrees = 0.0174533;
+  return value * kDegrees;
 }
 // Draw Triangles
 function drawTri(width, height) {
@@ -289,18 +293,20 @@ function walking3Input(value) {
   // console.log(compositeArray[0].bodies[0].vertices[0].x)
   // console.log(tri1PivotY - (100*Math.sin(tri1Angle)))
 }
+const kLineWidth = 2;
+const kStrokeStyle = "#666";
 function walking1(value) {
   // linkageLength = parseInt(value)
   for (let i = 0; i < 4; i++) {
-    jointComposites[i].constraints[0].render.lineWidth = 2;
-    jointComposites[i].constraints[0].render.strokeStyle = "#666";
+    jointComposites[i].constraints[0].render.lineWidth = kLineWidth;
+    jointComposites[i].constraints[0].render.strokeStyle = kStrokeStyle;
   }
 }
 function walking2(value) {
   // linkageLength = parseInt(value)\
   for (let i = 4; i < 8; i++) {
-    jointComposites[i].constraints[0].render.lineWidth = 2;
-    jointComposites[i].constraints[0].render.strokeStyle = "#666";
+    jointComposites[i].constraints[0].render.lineWidth = kLineWidth;
+    jointComposites[i].constraints[0].render.strokeStyle = kStrokeStyle;
   }
 }
 ///////////////// Animation /////////////////////////////////////
@@ -343,14 +349,14 @@ Events.on(engine, "afterUpdate", function (event) {
   const a4 = gearConstraintX;
   const b3 = compositeArray[3].constraints[0].pointA.y;
   const b4 = gearConstraintY;
-  triDistance = Math.sqrt((a1 - a2) * (a1 - a2) + (b1 - b2) * (b1 - b2));
-  const triDistance2 = Math.sqrt((a3 - a4) * (a3 - a4) + (b3 - b4) * (b3 - b4));
+  triDistance = Math.sqrt((a1 - a2) ** 2 + (b1 - b2) ** 2);
+  const triDistance2 = Math.sqrt((a3 - a4) ** 2 + (b3 - b4) ** 2);
 
   x1 = compositeArray[0].bodies[0].vertices[0].x;
   let x2 = compositeArray[0].bodies[0].vertices[1].x;
   y1 = compositeArray[0].bodies[0].vertices[0].y;
   y2 = compositeArray[0].bodies[0].vertices[1].y;
-  const triVertDist = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+  const triVertDist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
 
   const triHeight = compositeArray[0].height;
   const crankAngle = -compositeArray[1].bodies[0].angle;
@@ -391,7 +397,7 @@ Events.on(engine, "afterUpdate", function (event) {
   x2 = compositeArray[2].bodies[0].vertices[1].x;
   y1 = compositeArray[0].bodies[0].vertices[1].y;
   y2 = compositeArray[2].bodies[0].vertices[1].y;
-  walkingVert = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+  walkingVert = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
   // console.log(compositeArray[0].bodies[0].vertices[2].y)
 
   if (
@@ -417,28 +423,28 @@ Events.on(engine, "afterUpdate", function (event) {
 });
 
 ////////////////////// RUN /////////////////////////////
-
+const kFillStyle = "#FF6B6B";
 // run the engine
 radius = 25;
 addTriComposite(
-  window.innerWidth * (0.75 * 0.5) - 127.35,
-  window.innerHeight * 0.5 - 33.3333,
+  window.innerWidth * kWindowWidth - 127.35,
+  window.innerHeight * kWindowHeight - 33.3333,
   triangleWidth,
   triangleHeight
 );
 compositeArray[0].shape = "triTL";
 addCircleComposite(
-  window.innerWidth * (0.75 * 0.5),
-  window.innerHeight * 0.5,
+  window.innerWidth * kWindowWidth,
+  window.innerHeight * kWindowHeight,
   radius
 );
-centerPosX = window.innerWidth * (0.75 * 0.5);
-centerPosY = window.innerHeight * 0.5;
+centerPosX = window.innerWidth * kWindowWidth;
+centerPosY = window.innerHeight * kWindowHeight;
 changeBodyCircle(1);
 compositeArray[compositeArray.length - 1].bodies[0].render.fillStyle =
-  "#FF6B6B";
+kFillStyle;
 addTriComposite(
-  window.innerWidth * (0.75 * 0.5) - 127.35,
+  window.innerWidth * kWindowWidth - 127.35,
   compositeArray[0].constraints[0].pointA.y + 100,
   triangleWidth,
   -triangleHeight
@@ -446,14 +452,14 @@ addTriComposite(
 compositeArray[2].shape = "triBL";
 compositeArray[2].constraints[0].stiffness = 0.000001;
 addTriComposite(
-  window.innerWidth * (0.75 * 0.5) + 127.35,
-  window.innerHeight * 0.5 - 33.3333,
+  window.innerWidth * kWindowWidth + 127.35,
+  window.innerHeight * kWindowHeight - 33.3333,
   -triangleWidth,
   triangleHeight
 );
 compositeArray[3].shape = "triTR";
 addTriComposite(
-  window.innerWidth * (0.75 * 0.5) + 127.35,
+  window.innerWidth * kWindowWidth + 127.35,
   compositeArray[3].constraints[0].pointA.y + 100,
   -triangleWidth,
   -triangleHeight
