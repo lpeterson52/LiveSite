@@ -1,105 +1,73 @@
-body {margin:0;font-family:Arial}
-
-.topnav {
-  overflow: hidden;
-  background-color: #333;
+.bg-primary{
+    background-color: #985ec5 !important;
 }
-
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+.navbar{
+    padding:0px;
 }
-
-.active {
-  background-color: #04AA6D;
-  color: white;
+.nav-link {
+    color:white !important;
+    font-size:18px;
+    padding-top:14px;
+    padding-bottom:14px;
 }
-
-.topnav .icon {
-  display: none;
+.nav-item{
+    background-color: #985ec5;
+    transition:0.3s;
 }
-
-.dropdown {
-  float: left;
-  overflow: hidden;
+.nav-item:hover{
+    background-color: #8a46cf;
+    transition:0.3s;
 }
-
-.dropdown .dropbtn {
-  font-size: 17px;    
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
+/* Ensure dropdown opens on hover */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
 }
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 100000000 !important;
+.navbar-toggler{
+    background-color: #985ec5;
+    border:0px;
+    border-radius:0rem;
+    transition:0.3s;
+    padding-top:12px;
+    padding-bottom:12px;
 }
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-  z-index:100000000000000;
+.navbar-toggler:hover{
+    background-color: #8a46cf;
+    transition:0.3s;
 }
-
-.topnav a:hover, .dropdown:hover .dropbtn {
-  background-color: #555;
-  color: white;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child), .dropdown .dropbtn {
+/* Hide the dropdown menu by default */
+.dropdown-menu {
     display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
+    position: absolute; /* Ensure dropdown is positioned correctly */
+    background-color: #985ec5; /* Adjust based on your theme */
+    border: 0px; /* Adjust based on your theme */
+    padding:0px;
+    border-radius: 0rem; /* Adjust based on your theme */
+    padding-bottom:0px;
 }
 
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  .topnav.responsive .dropdown {float: none;}
-  .topnav.responsive .dropdown-content {position: relative;}
-  .topnav.responsive .dropdown .dropbtn {
-    display: block;
-    width: 100%;
-    text-align: left;
-  }
+.dropdown-item:hover {
+    background-color: #f8f9fa; /* Adjust based on your theme */
+}
+/* Default styling for dropdown items */
+.dropdown-item {
+    display: block; /* Make sure the items are block-level to fill the width of the dropdown */
+    width: 100%; /* Ensure the item fills the width of the dropdown */
+    padding: 5px; /* Padding around the text */
+    margin: 0; /* Remove any default margin */
+    clear: both; /* Clear floats */
+    font-weight: 400; /* Default font weight */
+    color: white; /* Default text color */
+    text-align: inherit; /* Align text based on its parent container */
+    background-color: transparent; /* Default background color */
+    border: 0; /* Remove border */
+    border-radius: 0rem; /* Default border radius */
+}
+
+/* Styling for dropdown items on hover */
+.dropdown-item:hover,
+.dropdown-item:focus {
+    color: #fff; /* Change text color on hover */
+    text-decoration: none; /* Remove underline */
+    background-color: #007bff; /* Change background color on hover */
 }
