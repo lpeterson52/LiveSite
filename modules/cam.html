@@ -1,3 +1,15 @@
+<!-- <?php
+include('../wp-blog-header.php');
+
+global $user_identity;
+if($user_identity){
+	echo $user_identity;
+}
+else{
+	//die('Sorry, you must be <a href="'. get_bloginfo('home') . '/wp-login.php?redirect_to=' . $_SERVER['PHP_SELF'] . '">logged in</a> to view this page.');
+}
+//echo do_shortcode( '[contact-form-7 id="1234" title="Contact form 1"]' );
+?> -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,8 +19,13 @@
     <link rel="shortcut icon" type="image/png" href="img/logo_webTab.png" />
     <link
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Conflicts with Navbar -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
     <!-- Optional theme -->
@@ -18,10 +35,14 @@
       integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <!-- Latest compiled and minified JavaScript -->
     <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-      integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
     <script src="js/decomp.js" type="text/javascript"></script>
@@ -29,6 +50,7 @@
     <script src="matterJS/build/Examples.js" type="text/javascript"></script>
     <script src="js/scaling.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/module.css" />
+    <link rel="stylesheet" type="text/css" href="css/navbar.css" />
   </head>
   <body>
     <script src="js/functions.js" type="text/javascript"></script>
@@ -37,20 +59,31 @@
     <script src="js/scaling.js" type="text/javascript"></script>
     <script src="js/showParts.js" type="text/javascript"></script>
     <script src="js/homeType.js" type="text/javascript"></script>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="http://www.papermech.net/">
-            <img id="logo" alt="Brand" src="img/logo_blue-03.png" />
-          </a>
+    <div class="topnav" id="myTopnav">
+      <a href="#home" class="active">Home</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Dropdown
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
         </div>
-        <div
-          class="collapse navbar-collapse"
-          id="bs-example-navbar-collapse-1"
-        ></div>
-        <!-- /.navbar-collapse -->
       </div>
-    </nav>
+      <a href="#about">About</a>
+      <a
+        href="javascript:void(0);"
+        style="font-size: 15px"
+        class="icon"
+        onclick="myFunction()"
+        >&#9776;</a
+      >
+    </div>
+
     <div class="container">
       <div class="module-name">
         <p>Cam +</p>
@@ -201,13 +234,6 @@
           </button>
         </div>
         <br />
-        <!-- <div>
-            <p>Motor Rotation:</p>
-            <br>
-                <button class = "object btn btn-primary" type="button" id="alternate" onclick="alternateMotor()">180</button>
-                <button class = "object btn btn-primary" type="button" id="continuous" onclick="continuousMotor()">Continuous</button>
-            </div>
-            <br> -->
         <div id="a-slider" class="slider-div">
           <label
             >Motor Speed: <span id="motorSpeedValue"></span> (<span
@@ -227,13 +253,6 @@
           />
         </div>
         <br />
-        <!--<div>
-            <p>Simulation:</p>
-            <br>
-                <button class = "object btn btn-primary" type="button" id="alternate" onclick="startRunner()">Start</button>
-                <button class = "object btn btn-primary" type="button" id="continuous" onclick="stopRunner()">Stop</button>
-
-            </div>-->
       </div>
       <div class="footer">
         <a href="http://www.papermech.net/modules/cam.php">
@@ -270,23 +289,15 @@
         <span class="stretch"></span>
       </div>
     </div>
-    <!--<button type="button" id="rotate" onclick="overlay3()">Set Angle</button>-->
-    <!--<div  id = "codeBlock">
-        <pre>
-        #include <Servo.h>
-
-        Servo myservo;
-
-        void setup()
-        {
-          myservo.attach(9);
-          myservo.write(90);  // set servo to mid-point
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+          x.className += " responsive";
+        } else {
+          x.className = "topnav";
         }
-
-        void loop() {}
-        </pre>
-    <div>-->
-
-    <script type="text/javascript"></script>
+      }
+    </script>
   </body>
 </html>
