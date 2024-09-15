@@ -7,6 +7,8 @@
 .nav-link {
     color:white !important;
     font-size:18px;
+    padding-left:20px !important;
+    padding-right:20px !important;
     padding-top:14px;
     padding-bottom:14px;
 }
@@ -21,7 +23,10 @@
 /* Ensure dropdown opens on hover */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
+    visibility:visible;
     margin-top: 0;
+    transition: 0.3s ease-in-out;
+    height:auto;
 }
 .navbar-toggler{
     background-color: #985ec5;
@@ -37,37 +42,35 @@
 }
 /* Hide the dropdown menu by default */
 .dropdown-menu {
-    display: none;
-    position: absolute; /* Ensure dropdown is positioned correctly */
-    background-color: #985ec5; /* Adjust based on your theme */
-    border: 0px; /* Adjust based on your theme */
+    display: block;
+    visibility: hidden;
+    height:0px;
+    position: absolute;
+    background-color: #985ec5;
+    border: 0px; 
     padding:0px;
-    border-radius: 0rem; /* Adjust based on your theme */
+    border-radius: 0rem; 
     padding-bottom:0px;
-}
-
-.dropdown-item:hover {
-    background-color: #f8f9fa; /* Adjust based on your theme */
 }
 /* Default styling for dropdown items */
 .dropdown-item {
-    display: block; /* Make sure the items are block-level to fill the width of the dropdown */
-    width: 100%; /* Ensure the item fills the width of the dropdown */
-    padding: 5px; /* Padding around the text */
-    margin: 0; /* Remove any default margin */
-    clear: both; /* Clear floats */
-    font-weight: 400; /* Default font weight */
-    color: white; /* Default text color */
-    text-align: inherit; /* Align text based on its parent container */
-    background-color: transparent; /* Default background color */
-    border: 0; /* Remove border */
-    border-radius: 0rem; /* Default border radius */
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 0;
+    clear: both;
+    font-weight: 400;
+    color: white;
+    text-align: inherit;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0rem;
 }
 
 /* Styling for dropdown items on hover */
 .dropdown-item:hover,
 .dropdown-item:focus {
-    color: #fff; /* Change text color on hover */
+    color:white;
     text-decoration: none; /* Remove underline */
-    background-color: #007bff; /* Change background color on hover */
+    background-color: #8a46cf; /* Change background color on hover */
 }
