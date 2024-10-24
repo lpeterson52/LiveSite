@@ -1,195 +1,185 @@
 body {
-        padding: 0; 
-        margin: 0;
-        background-color: #222;
-        color: #000;
-    } 
-html, body{
-  height:100%;
+  padding: 0;
+  margin: 0;
+  background-color: #222;
+  color: #000;
 }
-.navbar-default{
-    background-color: #fff !important;
-    background-image: none;
-    height: 57px;
-    }
-.navbar-brand{
-    position: absolute;
-    margin-top: 0;
-
+html,
+body {
+  height: 100%;
 }
-#logo{
-    margin: 0;
-    position: absolute;
-    margin-top: -10px;
-    height: 45px;
-    float: right;
+.navbar-default {
+  background-color: #fff !important;
+  background-image: none;
+  height: 57px;
 }
-.navbar{
-    margin-bottom: 0;
+.navbar-brand {
+  position: absolute;
+  margin-top: 0;
+}
+#logo {
+  margin: 0;
+  position: absolute;
+  margin-top: -10px;
+  height: 45px;
+  float: right;
 }
 canvas {
-    position: fixed;
-	display: inline-block;
-	float: right;
-    right: 0;
-    vertical-align: top;
-    border-left: 2px solid black;
-    width: 75%;
-    height: 100%;
-    z-index: -1;
-} 
-.container{
-    position: relative;
-    float: left;
-    width: 25%;
-    height: auto;
-    padding: 0;
-    background-color: #ccc;
-    border-right: 2px solid black;
-    z-index: 10;
+  position: fixed;
+  display: inline-block;
+  right: 0;
+  vertical-align: top;
+  border-left: 2px solid black;
+  width: 75%;
+  height: 100%;
+  z-index: -1;
 }
-.simulation{
-    display: inline-block !important;
+.container {
+  position: relative;
+  float: left;
+  width: 25%;
+  height: auto;
+  padding: 0;
+  background-color: #ccc;
+  border-right: 2px solid black;
+  z-index: 10;
 }
-#content{
-	position: absolute;
-	float: left;
-	width: 25%;
-	height: 100%;
-	display: inline-block;
+.simulation {
+  display: inline-block !important;
 }
-#openClose{
-    position:absolute;
-    top:70%;
+#content {
+  position: absolute;
+  float: left;
+  width: 25%;
+  height: 100%;
+  display: inline-block;
 }
-#flapping{
-    position:absolute;
-    top:73%;
+#openClose {
+  position: absolute;
+  top: 70%;
 }
-.values{
-    display: inline-block;
+#flapping {
+  position: absolute;
+  top: 73%;
 }
-.p2-container{
-
+.values {
+  display: inline-block;
 }
-#myCanvas{
-}
-#selected{
-    float: right;
-    display: inline-block;
-    position: absolute;
-    margin-top: 0px;
+#selected {
+  display: inline-block;
+  position: absolute;
+  margin-top: 0px;
 }
 
-#overlay, #overlay2{
-     visibility: hidden;
-     position: absolute;
-     left: 0px;
-     top: 0px;
-     width:100%;
-     height:100%;
-     text-align:center;
-     z-index: 1000;
+#overlay,
+#overlay2 {
+  visibility: hidden;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  z-index: 100;
 }
-#overlay div, #overlay2 div{
-     width:300px;
-     margin: 100px auto;
-     background-color: #fff;
-     border:1px solid #000;
-     padding:15px;
-     text-align:center;
+#overlay div,
+#overlay2 div {
+  width: 300px;
+  margin: 100px auto;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 15px;
+  text-align: center;
 }
-#codeBlock{
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background-color: #ccc;
-    color: #000;
+#codeBlock {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #ccc;
+  color: #000;
 }
-pre{
-    background-color: #ccc;
+pre {
+  background-color: #ccc;
 }
-.gear-size{
-    border-radius: 3px;
-    width: 40px;
-    text-align: center;
-    margin-right: 31px;
+.gear-size {
+  border-radius: 3px;
+  width: 40px;
+  text-align: center;
+  margin-right: 31px;
 }
-.btn-primary{
-    background-image: none;
-    background-color: #ddd;
-    color: #000;
+.btn-primary {
+  background-image: none;
+  background-color: #ddd;
+  color: #000;
 }
 /*.btn-primary:active{
     background-image: linear-gradient(to bottom,#337ab7 0,#265a88 100%);
 }*/
-input[type="range"]{
-    width: 75% !important;
+input[type="range"] {
+  width: 75% !important;
 }
-.fullColumn{
-    position: relative;
-    float: left;
-    width: 25%;
-    height: 100%;
-    padding: 0;
-    z-index: 9;
+.fullColumn {
+  position: relative;
+  float: left;
+  width: 25%;
+  height: 100%;
+  padding: 0;
+  z-index: 9;
 }
-.fullPage{
-    width: 100%;
-    height: 2000px;
-    position: relative;
+.fullPage {
+  width: 100%;
+  height: 2000px;
+  position: relative;
 }
-#preview{
-    height: 250px;
-    width: 100%;
-    background-color: #fff;
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: none;
+#preview {
+  height: 250px;
+  width: 100%;
+  background-color: #fff;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: none;
 }
 p {
-    display: inline-block;
+  display: inline-block;
+  font-size: 1.2em;
 }
-.module-name, .footer{
-    width: 100%;
-    height: 50px;
-    background-color: #000;
-    color: #fff;
-    text-align: center;
+.module-name,
+.footer {
+  width: 100%;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
 }
-.controls{
-    height: auto;
-    margin: 20px;
+.controls {
+  height: auto;
+  margin: 20px;
 }
-.controls-dark{
-    background-color: #acacac;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.controls-dark {
+  background-color: #acacac;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-.controls label, .controls input{
-    
+.controls label,
+.controls input {
 }
-.slider-div{
-    height: 30px;
-    
+.slider-div {
+  height: 30px;
 }
-.slider-div input, .slider-div label{
-    position: relative;
-    height: 100%;
-    z-index: 1000;
+.slider-div input,
+.slider-div label {
+  position: relative;
+  height: 100%;
+  z-index: 100;
 }
-.slider-div label{
-    font-size: 1.2em;
-    font-weight: normal;
-}
-p{
-    font-size: 1.2em;
+.slider-div label {
+  font-size: 1.2em;
+  font-weight: normal;
 }
 
-input[type=checkbox]
-{
+input[type="checkbox"] {
   /* Double-sized Checkboxes */
   -ms-transform: scale(1.2); /* IE */
   -moz-transform: scale(1.2); /* FF */
@@ -197,64 +187,64 @@ input[type=checkbox]
   -o-transform: scale(1.2); /* Opera */
   padding: 10px;
 }
-.rendering{
-    color: #000;
+.rendering {
+  color: #000;
 }
-input[type=range]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   background: #999;
 }
 
-input[type=range]:focus::-webkit-slider-runnable-track {
+input[type="range"]:focus::-webkit-slider-runnable-track {
   background: #999;
 }
 
-input[type=range]::-moz-range-track {
+input[type="range"]::-moz-range-track {
   background: #999;
 }
 
-input[type=range]::-ms-track {
-    background: #999;
+input[type="range"]::-ms-track {
+  background: #999;
 }
-.footer{
-    text-align: justify;
-    -ms-text-justify: distribute-all-lines;
-    text-justify: distribute-all-lines;
-    padding: 10px 40px 10px 40px;
-    height: 90px;
+.footer {
+  text-align: justify;
+  -ms-text-justify: distribute-all-lines;
+  text-justify: distribute-all-lines;
+  padding: 10px 40px 10px 40px;
+  height: 90px;
 }
-.footer-btn{
-    width: 50px;
-    height: 50px;
-    background-color: #fff;
-    background-image: none;
-    color: #999;
+.footer-btn {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  background-image: none;
+  color: #999;
 }
-.footer-btn-div{
-    vertical-align: top;
-    display: inline-block;
-    *display: inline;
-    zoom: 1;
-    color: #fff;
-    text-align: center;
+.footer-btn-div {
+  vertical-align: top;
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+  color: #fff;
+  text-align: center;
 }
 .stretch {
-    width: 100%;
-    display: inline-block;
-    font-size: 0;
-    line-height: 0
+  width: 100%;
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
 }
-.module-name p{
-    font-size: 1.8em;
+.module-name p {
+  font-size: 1.8em;
 }
-a:focus, a:hover{
-    text-decoration: none;  
+a{
+    text-decoration: none;
 }
 .btn-icon {
-    max-width: 100%;
+  max-width: 100%;
 }
-label{
-    display: initial;
+label {
+  display: initial;
 }
 .nonSym {
-    display: none;
+  display: none;
 }
